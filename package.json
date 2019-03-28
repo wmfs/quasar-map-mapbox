@@ -1,0 +1,48 @@
+{
+  "name": "@wmfs/quasar-map-mapbox",
+  "description": "MapBox wrapped as a Quasar component",
+  "version": "0.0.0-semantically-released",
+  "author": "West Midlands Fire Service",
+  "keywords": [
+    "tymly",
+    "cardscript"
+  ],
+  "main": "lib/QMap.vue",
+  "dependencies": {
+    "mapbox-gl": "0.53.1"
+  },
+  "devDependencies": {
+    "chai": "4.2.0",
+    "codecov": "3.1.0",
+    "conventional-changelog-metahub": "2.0.2",
+    "cz-conventional-changelog": "2.1.0",
+    "mocha": "5.2.0",
+    "nyc": "13.1.0",
+    "semantic-release": "15.13.3",
+    "standard": "12.0.1",
+    "@semantic-release/changelog": "3.0.2",
+    "@semantic-release/git": "7.0.8"
+  },
+  "scripts": {
+    "lint": "standard",
+    "test": "nyc mocha && standard",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "semantic-release": "semantic-release"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wmfs/quasar-map-mapbox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wmfs/quasar-map-mapbox/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
