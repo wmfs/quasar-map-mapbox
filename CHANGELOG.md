@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.0.0...v1.0.1) (2019-03-28)
+
+
+### 🐛 Bug Fixes
+
+* Remove Tymly-isms ([f8b140c](https://github.com/wmfs/quasar-map-mapbox/commit/f8b140c))
+
 # 1.0.0 (2019-03-28)
 
 
