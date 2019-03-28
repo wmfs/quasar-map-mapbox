@@ -21,6 +21,7 @@
 
 <script>
 import mapboxgl from 'mapbox-gl'
+import template from 'lodash.template'
 
 const locationColour = '#2222B4'
 const prevLocationColour = '#6666D8'
@@ -37,7 +38,8 @@ export default {
   ],
   data () {
     const templCentre = [this.centreLongitude, this.centreLatitude]
-    const centre = templCentre.map(c => this.$parent.parseTemplate(c, { data: this.$parent.data }))
+    const model = this.$vnode.data.model
+    const centre = templCentre.map(c => evalTemplate(c, { [model.expression]: model.value }))
     const showCentre = (this.centreShow !== 'false')
 
     return {
@@ -46,7 +48,7 @@ export default {
       mode: 'streets',
       mapCentre: centre,
       centreMarker: showCentre,
-      model: this.$parent.data
+      model: model.value
     }
   }, // data
   mounted () {
@@ -155,6 +157,16 @@ export default {
     } // addMarker
   } // methods
 } // ...
+
+function evalTemplate (temp, data) {
+  const compiled = template(
+    temp,
+    {
+      interpolate: /{{([\s\S]+?)}}/g
+    }
+  )
+  return compiled(data)
+} // evalTemplate
 
 function paintCircle (colour) {
   return {
