@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.0.1...v1.1.0) (2019-04-01)
+
+
+### ✨ Features
+
+* new 'fixed' prop, whether or not you can interact with the map ([fc50396](https://github.com/wmfs/quasar-map-mapbox/commit/fc50396))
+
 ## [1.0.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.0.0...v1.0.1) (2019-03-28)
 
 
