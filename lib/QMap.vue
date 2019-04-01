@@ -34,7 +34,8 @@ export default {
     'centre-show',
     'longitude',
     'latitude',
-    'locked'
+    'locked',
+    'fixed'
   ],
   data () {
     const templCentre = [this.centreLongitude, this.centreLatitude]
@@ -62,7 +63,7 @@ export default {
     onLoad () {
       this.addMarker('address', this.mapCentre, locationColour, this.centreMarker)
 
-      this.map.on('click', evt => this.onClick(evt))
+      if (!this.fixed) this.map.on('click', evt => this.onClick(evt))
     }, // onLoad
     onClick (evt) {
       const { lng, lat } = evt.lngLat
