@@ -41,7 +41,15 @@ export default {
 }
 </script>
 ```
-Defined the MAPBOX_ACCESS_TOKEN environment variable at build time.
+A map may have many markers.
+
+All parameters are optional. 
+
+If the QMap's centre-latitude and centre-longitude are not defined, the map will attempt to centre of the mid-point of its markers.
+
+## Build
+
+Define the MAPBOX_ACCESS_TOKEN environment variable at build time.
 
 
 ## <a name="license"></a>License

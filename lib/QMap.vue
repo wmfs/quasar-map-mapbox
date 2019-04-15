@@ -33,16 +33,16 @@ export default {
     'locked'
   ],
   data () {
-    const centre = [this.centreLongitude, this.centreLatitude]
-
     return {
       ready: false,
       map: null,
-      mode: 'streets',
-      mapCentre: centre,
+      mode: 'streets'
     }
   }, // data
   mounted () {
+    this.components = findComponents(this)
+    this.mapCentre = findCentre(this, this.components)
+
     this.ready = true
     this.render()
   }, // mounted
@@ -51,20 +51,15 @@ export default {
   }, // beforeDestroy
   methods: {
     onLoad () {
-      if (!this.$slots.default) return
-      this.$slots.default.forEach(s => {
-        const onLoad = s.componentInstance && s.componentInstance.onLoad
-
-        if (onLoad) {
-          onLoad(this.map)
-        }
+      this.components.forEach(s => {
+        s.onLoad && s.onLoad(this.map)
       })
     }, // onLoad
     onClick (evt) {
       const { lng, lat } = evt.lngLat
 
-      this.$slots.default.forEach(s => {
-        const { isHit, onClick }= s.componentInstance
+      this.components.forEach(s => {
+        const { isHit, onClick } = s
         if (isHit && isHit(lng, lat)) {
           onClick(lng, lat)
         }
@@ -118,6 +113,42 @@ export default {
     }
   } // methods
 } // ...
+
+function findCentre (qmap, components) {
+  if (qmap.centreLongitude && qmap.centreLatitude) {
+    return [qmap.centreLongitude, qmap.centreLatitude]
+  }
+
+  const allPositions = components
+    .map(c => c.position)
+    .filter(c => c)
+
+  if (allPositions.length) {
+    return [
+      averagePosition(allPositions, 0),
+      averagePosition(allPositions, 1)
+    ]
+  }
+
+  return [0, 0]
+} // findCentre
+
+function findComponents (qmap) {
+  if (!qmap.$slots || !qmap.$slots.default) return []
+
+  return qmap.$slots.default
+    .map(c => c.componentInstance)
+    .filter(c => c)
+} // findComponents
+
+function averagePosition(allPositions, index) {
+  const sum = allPositions
+    .map(p => p[index])
+    .map(p => Number(p))
+    .reduce((total, p) => total+p)
+  const avg = sum / allPositions.length
+  return avg
+} // averagePosition
 
 </script>
 
