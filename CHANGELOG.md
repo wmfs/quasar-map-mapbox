@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.2.0...v1.3.0) (2019-04-15)
+
+
+### ✨ Features
+
+* Centre on markers if no explicit centre is defined. ([3eaa336](https://github.com/wmfs/quasar-map-mapbox/commit/3eaa336))
+
 # [1.2.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.1.0...v1.2.0) (2019-04-15)
 
 
