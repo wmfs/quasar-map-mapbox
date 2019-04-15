@@ -29,6 +29,7 @@ $ npm install @wmfs/quasar-map-mapbox --save
       longitude=... 
       color=...  // optional
       id=...     // optional
+      :locked=true|false // whether this marker can be dragged and moved around 
   </q-map>
 </template>
 <script>
