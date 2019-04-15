@@ -22,9 +22,14 @@ $ npm install @wmfs/quasar-map-mapbox --save
   <q-map
     centre-latitude=...  // initial centre
     centre-longitude=... 
-    centre-show=...      // false|true, draw marker to show centre
-    ...
-    />
+    :locked=true|false   // whether the map can be panned and clicked 
+    >
+    <q-map-circle
+      latitude=...  // marker position
+      longitude=... 
+      color=...  // optional
+      id=...     // optional
+  </q-map>
 </template>
 <script>
 import QMap from '@wmfs/quasar-map-mapbox'
