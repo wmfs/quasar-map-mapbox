@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.4.0...v1.5.0) (2019-04-15)
+
+
+### ✨ Features
+
+* Bounds fit if centering multiple markers ([9d76567](https://github.com/wmfs/quasar-map-mapbox/commit/9d76567))
+
 # [1.4.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.3.0...v1.4.0) (2019-04-15)
 
 
