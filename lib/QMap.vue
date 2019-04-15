@@ -51,20 +51,11 @@ export default {
   }, // beforeDestroy
   methods: {
     onLoad () {
+      this.map.locked = this.locked
       this.components.forEach(s => {
         s.onLoad && s.onLoad(this.map)
       })
     }, // onLoad
-    onClick (evt) {
-      const { lng, lat } = evt.lngLat
-
-      this.components.forEach(s => {
-        const { isHit, onClick } = s
-        if (isHit && isHit(lng, lat)) {
-          onClick(lng, lat)
-        }
-      })
-    },
     mapOptions () {
       const options = {
         container: 'map', // container id
