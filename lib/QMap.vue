@@ -41,7 +41,9 @@ export default {
   }, // data
   mounted () {
     this.components = findComponents(this)
-    this.mapCentre = findCentre(this, this.components)
+    const [centre, bounds] = findCentre(this, this.components)
+    this.mapCentre = centre
+    this.initialBounds = bounds
 
     this.ready = true
     this.render()
@@ -51,6 +53,9 @@ export default {
   }, // beforeDestroy
   methods: {
     onLoad () {
+      if (this.initialBounds) {
+        this.map.fitBounds(this.initialBounds, {padding: 20})
+      }
       this.map.locked = this.locked
       this.components.forEach(s => {
         s.onLoad && s.onLoad(this.map)
@@ -107,7 +112,7 @@ export default {
 
 function findCentre (qmap, components) {
   if (qmap.centreLongitude && qmap.centreLatitude) {
-    return [qmap.centreLongitude, qmap.centreLatitude]
+    return [[qmap.centreLongitude, qmap.centreLatitude], null]
   }
 
   const allPositions = components
@@ -115,13 +120,20 @@ function findCentre (qmap, components) {
     .filter(c => c)
 
   if (allPositions.length) {
-    return [
-      averagePosition(allPositions, 0),
-      averagePosition(allPositions, 1)
-    ]
-  }
+    if (allPositions.length === 1) {
+      return [allPositions[0], null]
+    }
 
-  return [0, 0]
+    return [
+      [
+        averagePosition(allPositions, 0),
+        averagePosition(allPositions, 1)
+      ],
+      allPositions
+    ]
+  } // have components
+
+  return [[0, 0], null]
 } // findCentre
 
 function findComponents (qmap) {
