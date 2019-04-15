@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.3.0...v1.4.0) (2019-04-15)
+
+
+### ✨ Features
+
+* Markers on Input.Map are draggable. ([2437387](https://github.com/wmfs/quasar-map-mapbox/commit/2437387))
+
+
+### 📚 Documentation
+
+* Update with locked field for markers ([6c72173](https://github.com/wmfs/quasar-map-mapbox/commit/6c72173))
+
 # [1.3.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.2.0...v1.3.0) (2019-04-15)
 
 
