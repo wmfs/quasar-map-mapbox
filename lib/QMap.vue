@@ -41,9 +41,6 @@ export default {
   }, // data
   mounted () {
     this.components = findComponents(this)
-    const [centre, bounds] = findCentre(this, this.components)
-    this.mapCentre = centre
-    this.initialBounds = bounds
 
     this.ready = true
     this.render()
@@ -53,18 +50,19 @@ export default {
   }, // beforeDestroy
   methods: {
     onLoad () {
-      if (this.initialBounds) {
-        this.map.fitBounds(this.initialBounds, {padding: 20})
-      }
       this.map.locked = this.locked
       this.components.forEach(s => {
         s.onLoad && s.onLoad(this.map)
       })
     }, // onLoad
     mapOptions () {
+      const [centre, bounds] = findCentre(this, this.components)
+
       const options = {
         container: 'map', // container id
-        center: this.mapCentre,
+        center: centre,
+        bounds: bounds,
+        fitBoundsOptions: {padding: 20},
         interactive: !this.locked,
         zoom: 16
       }
@@ -125,11 +123,8 @@ function findCentre (qmap, components) {
     }
 
     return [
-      [
-        averagePosition(allPositions, 0),
-        averagePosition(allPositions, 1)
-      ],
-      allPositions
+      allPositions[0],
+      bounds(allPositions)
     ]
   } // have components
 
@@ -144,14 +139,26 @@ function findComponents (qmap) {
     .filter(c => c)
 } // findComponents
 
-function averagePosition(allPositions, index) {
-  const sum = allPositions
+function bounds (allPositions) {
+  return [
+    minOf(allPositions, 0), minOf(allPositions, 1),
+    maxOf(allPositions, 0), maxOf(allPositions, 1)
+  ]
+} // bounds
+
+function minOf(allPositions, index) {
+  return findOf(allPositions, index, Math.min)
+} // minOf
+
+function maxOf(allPositions, index) {
+  return findOf(allPositions, index, Math.max)
+} // maxOf
+
+function findOf(allPositions, index, fn) {
+  const p = allPositions
     .map(p => p[index])
     .map(p => Number(p))
-    .reduce((total, p) => total+p)
-  const avg = sum / allPositions.length
-  return avg
-} // averagePosition
-
+  return fn(...p)
+} // findOf
 </script>
 
