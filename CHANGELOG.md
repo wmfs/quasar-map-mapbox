@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.5.0...v1.5.1) (2019-04-15)
+
+
+### 🐛 Bug Fixes
+
+* Fit to bounds at initialisation, not after load ([a285ce8](https://github.com/wmfs/quasar-map-mapbox/commit/a285ce8))
+
 # [1.5.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.4.0...v1.5.0) (2019-04-15)
 
 
