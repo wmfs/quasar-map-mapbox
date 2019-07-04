@@ -1,7 +1,7 @@
 # quasar-map-mapbox
 
 [![Tymly Cardscript](https://img.shields.io/badge/tymly-cardscript-blue.svg)](https://tymly.io/)
-[![Build Status](https://travis-ci.com/wmfs/quasar-map-mapbox.svg?branch=master)](https://travis-ci.com/wmfs/quasar-map-mapbox)
+[![CircleCI](https://circleci.com/gh/wmfs/quasar-map-mapbox.svg?style=svg)](https://circleci.com/gh/wmfs/quasar-map-mapbox)
 [![npm (scoped)](https://img.shields.io/npm/v/@wmfs/quasar-map-mapbox.svg)](https://www.npmjs.com/package/@wmfs/quasar-map-mapbox) 
 [![Dependabot badge](https://img.shields.io/badge/Dependabot-active-brightgreen.svg)](https://dependabot.com/) 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) 
