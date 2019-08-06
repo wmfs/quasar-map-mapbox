@@ -3,6 +3,7 @@
 </template>
 
 <script>
+// TODO: mapbox marker hard to move on touchscreen when zoomed out
 
 const locationColour = '#2222B4'
 const prevLocationColour = '#6666D8'
@@ -16,17 +17,35 @@ export default {
     'id'
   ],
   data () {
-    const position = [this.longitude, this.latitude]
-    const colour = this.color || locationColour
-    const id = this.id || `${this._uid}`
     return {
-      markerId: id,
-      markerColour: colour,
-      position: position
+      markerId: this.id || `${this._uid}`,
+      markerColour: this.color || locationColour,
+      position: [this.longitude, this.latitude],
+      map: null
+    }
+  },
+  watch: {
+    longitude () {
+      setMarker(
+        this.map,
+        this.markerId,
+        [this.longitude, this.latitude],
+        this.markerColour
+      )
+    },
+    latitude () {
+      setMarker(
+        this.map,
+        this.markerId,
+        [this.longitude, this.latitude],
+        this.markerColour
+      )
     }
   },
   methods: {
     onLoad (map) {
+      this.map = map
+
       setMarker(
         map,
         this.markerId,
