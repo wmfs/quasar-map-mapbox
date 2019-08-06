@@ -1,3 +1,22 @@
+# [1.6.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.5.1...v1.6.0) (2019-08-06)
+
+
+### ✨ Features
+
+* allow enter map coords ([20a16d7](https://github.com/wmfs/quasar-map-mapbox/commit/20a16d7))
+
+
+### 📚 Documentation
+
+* Add CircleCI badge to readme ([13a0b91](https://github.com/wmfs/quasar-map-mapbox/commit/13a0b91))
+
+
+### ⚙️ Continuous Integrations
+
+* **circle:** Add CircleCI config ([f73032a](https://github.com/wmfs/quasar-map-mapbox/commit/f73032a))
+* **circle:** Rename step ([154fcb8](https://github.com/wmfs/quasar-map-mapbox/commit/154fcb8))
+* **travis:** Remove Travis config ([5e4c688](https://github.com/wmfs/quasar-map-mapbox/commit/5e4c688))
+
 ## [1.5.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.5.0...v1.5.1) (2019-04-15)
 
 
