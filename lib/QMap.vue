@@ -30,7 +30,8 @@ export default {
   props: [
     'centre-longitude',
     'centre-latitude',
-    'locked'
+    'locked',
+    'id'
   ],
   data () {
     return {
@@ -44,6 +45,12 @@ export default {
 
     this.ready = true
     this.render()
+
+    this.$root.$on('MAP_FLY_TO', ({ id, options }) => {
+      if (this.id === id && this.map) {
+        this.map.flyTo(options)
+      }
+    })
   }, // mounted
   beforeDestroy () {
     this.destroyMap()
@@ -89,6 +96,8 @@ export default {
       if (this.navigationControl) this.map.removeControl(this.navigationControl)
       this.map.remove()
       this.map = null
+
+      this.$root.$off('MAP_FLY_TO')
     }, // destroyMap
     render () {
       if (this.ready) {
