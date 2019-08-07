@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.6.0...v1.7.0) (2019-08-07)
+
+
+### ✨ Features
+
+* allow flying to coords ([6789488](https://github.com/wmfs/quasar-map-mapbox/commit/6789488))
+
 # [1.6.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.5.1...v1.6.0) (2019-08-06)
 
 
