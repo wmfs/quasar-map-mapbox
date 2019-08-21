@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.7.0...v1.8.0) (2019-08-21)
+
+
+### ✨ Features
+
+* extend map to include OSGridRef format ([27230ff](https://github.com/wmfs/quasar-map-mapbox/commit/27230ff))
+
 # [1.7.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.6.0...v1.7.0) (2019-08-07)
 
 
