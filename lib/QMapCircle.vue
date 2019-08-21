@@ -5,22 +5,44 @@
 <script>
 // TODO: mapbox marker hard to move on touchscreen when zoomed out
 
+import { throttle } from 'quasar'
+import OsGridRef, { LatLon } from 'geodesy/osgridref.js'
+
 const locationColour = '#2222B4'
 const prevLocationColour = '#6666D8'
 
 export default {
   name: 'Q-Mapcircle',
   props: [
+    'format',
+    'x',
+    'y',
     'longitude',
     'latitude',
     'color',
     'id'
   ],
   data () {
+    let latitude = this.latitude || 0
+    let longitude = this.longitude || 0
+
+    if (this.format === 'OSGridRef') {
+      if (this.x && this.y) {
+        const gridref = new OsGridRef(this.x, this.y)
+        const pWgs84 = gridref.toLatLon()
+
+        latitude = pWgs84._lat
+        longitude = pWgs84._lon
+      } else {
+        latitude = 0
+        longitude = 0
+      }
+    }
+
     return {
       markerId: this.id || `${this._uid}`,
       markerColour: this.color || locationColour,
-      position: [this.longitude, this.latitude],
+      position: [longitude, latitude],
       map: null
     }
   },
@@ -38,6 +60,32 @@ export default {
         this.map,
         this.markerId,
         [this.longitude, this.latitude],
+        this.markerColour
+      )
+    },
+    x () {
+      const gridref = new OsGridRef(this.x, this.y)
+      const pWgs84 = gridref.toLatLon()
+      const latitude = pWgs84._lat
+      const longitude = pWgs84._lon
+
+      setMarker(
+        this.map,
+        this.markerId,
+        [longitude, latitude],
+        this.markerColour
+      )
+    },
+    y () {
+      const gridref = new OsGridRef(this.x, this.y)
+      const pWgs84 = gridref.toLatLon()
+      const latitude = pWgs84._lat
+      const longitude = pWgs84._lon
+
+      setMarker(
+        this.map,
+        this.markerId,
+        [longitude, latitude],
         this.markerColour
       )
     }
@@ -73,10 +121,20 @@ export default {
     onMove (e, map) {
       map.getCanvasContainer().style.cursor = 'grabbing'
 
-      const centre = [e.lngLat.lng, e.lngLat.lat]
-      this.$emit('longitude', centre[0])
-      this.$emit('latitude', centre[1])
-      map.getSource(this.markerId).setData(makeSource(centre).data);
+      const {lat, lng} = e.lngLat
+
+      throttle(() => {
+        if (this.format === 'OSGridRef') {
+          const grid = new LatLon(lat, lng).toOsGrid()
+          this.$emit('x', grid.easting)
+          this.$emit('y', grid.northing)
+        } else {
+          this.$emit('longitude', lng)
+          this.$emit('latitude', lat)
+        }
+      }, 600)()
+
+      map.getSource(this.markerId).setData(makeSource([lng, lat]).data);
     },
     onUp (e, map, onMove) {
       map.getCanvasContainer().style.cursor = ''
