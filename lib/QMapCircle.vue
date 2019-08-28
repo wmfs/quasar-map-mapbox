@@ -9,7 +9,7 @@ import { throttle } from 'quasar'
 import OsGridRef, { LatLon } from 'geodesy/osgridref.js'
 
 const locationColour = '#2222B4'
-const prevLocationColour = '#6666D8'
+// const prevLocationColour = '#6666D8'
 
 export default {
   name: 'Q-Mapcircle',
@@ -20,7 +20,8 @@ export default {
     'longitude',
     'latitude',
     'color',
-    'id'
+    'id',
+    'showMarker'
   ],
   data () {
     let latitude = this.latitude || 0
@@ -52,7 +53,8 @@ export default {
         this.map,
         this.markerId,
         [this.longitude, this.latitude],
-        this.markerColour
+        this.markerColour,
+        this.showMarker
       )
     },
     latitude () {
@@ -60,7 +62,8 @@ export default {
         this.map,
         this.markerId,
         [this.longitude, this.latitude],
-        this.markerColour
+        this.markerColour,
+        this.showMarker
       )
     },
     x () {
@@ -73,7 +76,8 @@ export default {
         this.map,
         this.markerId,
         [longitude, latitude],
-        this.markerColour
+        this.markerColour,
+        this.showMarker
       )
     },
     y () {
@@ -86,8 +90,12 @@ export default {
         this.map,
         this.markerId,
         [longitude, latitude],
-        this.markerColour
+        this.markerColour,
+        this.showMarker
       )
+    },
+    showMarker () {
+      this.map.setLayoutProperty(this.markerId, 'visibility', this.showMarker ? 'visible' : 'none')
     }
   },
   methods: {
@@ -98,7 +106,8 @@ export default {
         map,
         this.markerId,
         this.position,
-        this.markerColour
+        this.markerColour,
+        this.showMarker
       )
 
       if (!this.locked && !map.locked) {
@@ -134,7 +143,7 @@ export default {
         }
       }, 600)()
 
-      map.getSource(this.markerId).setData(makeSource([lng, lat]).data);
+      map.getSource(this.markerId).setData(makeSource([lng, lat]).data)
     },
     onUp (e, map, onMove) {
       map.getCanvasContainer().style.cursor = ''
@@ -144,7 +153,7 @@ export default {
 } // export default
 
 
-function setMarker (map, id, centre, colour) {
+function setMarker (map, id, centre, colour, showMarker) {
   if (map.getLayer(id)) {
     map.removeLayer(id)
     map.removeSource(id)
@@ -157,7 +166,10 @@ function setMarker (map, id, centre, colour) {
     type: 'circle',
     source: id,
     paint: paintCircle(colour),
-    filter: ['==', '$type', 'Point']
+    filter: ['==', '$type', 'Point'],
+    layout: {
+      visibility: showMarker ? 'visible' : 'none'
+    }
   }
 
   map.addLayer(markerLayer)
