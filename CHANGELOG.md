@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.8.0...v1.9.0) (2019-08-28)
+
+
+### ✨ Features
+
+* allow map markers to show conditionally ([5e40429](https://github.com/wmfs/quasar-map-mapbox/commit/5e40429))
+
 # [1.8.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.7.0...v1.8.0) (2019-08-21)
 
 
