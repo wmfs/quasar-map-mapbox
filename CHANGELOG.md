@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.10.0...v1.11.0) (2019-11-14)
+
+
+### ✨ Features
+
+* show popup on markers if label is present ([](https://github.com/wmfs/quasar-map-mapbox/commit/c6c66b4))
+
 # [1.10.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.9.0...v1.10.0) (2019-11-14)
 
 
