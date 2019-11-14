@@ -28,6 +28,7 @@ export default {
   name: 'Q-Map',
   components: { QMapCircle },
   props: [
+    'defaultCentreToGeolocation',
     'centre-longitude',
     'centre-latitude',
     'locked',
@@ -40,11 +41,11 @@ export default {
       mode: 'streets'
     }
   }, // data
-  mounted () {
+  async mounted () {
     this.components = findComponents(this)
 
     this.ready = true
-    this.render()
+    await this.render()
 
     this.$root.$on('MAP_FLY_TO', ({ id, options }) => {
       if (this.id === id && this.map) {
@@ -62,8 +63,8 @@ export default {
         s.onLoad && s.onLoad(this.map)
       })
     }, // onLoad
-    mapOptions () {
-      const [centre, bounds] = findCentre(this, this.components)
+    async mapOptions () {
+      const [centre, bounds] = await findCentre(this, this.components)
 
       const options = {
         container: 'map', // container id
@@ -99,13 +100,13 @@ export default {
 
       this.$root.$off('MAP_FLY_TO')
     }, // destroyMap
-    render () {
+    async render () {
       if (this.ready) {
         this.destroyMap()
 
         mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN
 
-        const options = this.mapOptions()
+        const options = await this.mapOptions()
         this.map = new mapboxgl.Map(options)
 
         this.navigationControl = new mapboxgl.NavigationControl({ showCompass: false })
@@ -117,7 +118,13 @@ export default {
   } // methods
 } // ...
 
-function findCentre (qmap, components) {
+async function findCentre (qmap, components) {
+  if (qmap.defaultCentreToGeolocation) {
+    const position = await getCurrentPosition()
+    const { latitude, longitude } = position.coords
+    return [[longitude, latitude], null]
+  }
+
   if (qmap.centreLongitude && qmap.centreLatitude) {
     return [[qmap.centreLongitude, qmap.centreLatitude], null]
   }
@@ -169,5 +176,11 @@ function findOf(allPositions, index, fn) {
     .map(p => Number(p))
   return fn(...p)
 } // findOf
+
+function getCurrentPosition (options = {}) {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject, options)
+  })
+}
 </script>
 
