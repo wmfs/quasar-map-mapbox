@@ -75,6 +75,10 @@ export default {
         zoom: 16
       }
 
+      if (this.defaultCentreToGeolocation) {
+        options.zoom = 9
+      }
+
       switch (this.mode) {
         case 'streets':
           options.style = 'mapbox://styles/mapbox/streets-v11'

@@ -4,7 +4,7 @@
 
 <script>
 // TODO: mapbox marker hard to move on touchscreen when zoomed out
-
+import mapboxgl from 'mapbox-gl'
 import { throttle } from 'quasar'
 import OsGridRef, { LatLon } from 'geodesy/osgridref.js'
 
@@ -21,7 +21,8 @@ export default {
     'latitude',
     'color',
     'id',
-    'showMarker'
+    'showMarker',
+    'label'
   ],
   data () {
     let latitude = this.latitude || 0
@@ -49,56 +50,47 @@ export default {
   },
   watch: {
     longitude () {
-      setMarker(
-        this.map,
-        this.markerId,
-        [this.longitude, this.latitude],
-        this.markerColour,
-        this.showMarker
-      )
+      this.updateLatLon()
     },
     latitude () {
-      setMarker(
-        this.map,
-        this.markerId,
-        [this.longitude, this.latitude],
-        this.markerColour,
-        this.showMarker
-      )
+      this.updateLatLon()
     },
     x () {
-      const gridref = new OsGridRef(this.x, this.y)
-      const pWgs84 = gridref.toLatLon()
-      const latitude = pWgs84._lat
-      const longitude = pWgs84._lon
-
-      setMarker(
-        this.map,
-        this.markerId,
-        [longitude, latitude],
-        this.markerColour,
-        this.showMarker
-      )
+      this.updateXY()
     },
     y () {
-      const gridref = new OsGridRef(this.x, this.y)
-      const pWgs84 = gridref.toLatLon()
-      const latitude = pWgs84._lat
-      const longitude = pWgs84._lon
-
-      setMarker(
-        this.map,
-        this.markerId,
-        [longitude, latitude],
-        this.markerColour,
-        this.showMarker
-      )
+      this.updateXY()
     },
     showMarker () {
       this.map.setLayoutProperty(this.markerId, 'visibility', this.showMarker ? 'visible' : 'none')
     }
   },
   methods: {
+    updateXY () {
+      const gridref = new OsGridRef(this.x, this.y)
+      const pWgs84 = gridref.toLatLon()
+
+      this.position = [pWgs84._lon, pWgs84._lat]
+
+      setMarker(
+        this.map,
+        this.markerId,
+        this.position,
+        this.markerColour,
+        this.showMarker
+      )
+    },
+    updateLatLon () {
+      this.position = [this.longitude, this.latitude]
+
+      setMarker(
+        this.map,
+        this.markerId,
+        this.position,
+        this.markerColour,
+        this.showMarker
+      )
+    },
     onLoad (map) {
       this.map = map
 
@@ -110,13 +102,19 @@ export default {
         this.showMarker
       )
 
+      const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false })
+
       if (!this.locked && !map.locked) {
         const canvas = map.getCanvasContainer()
         map.on('mouseenter', this.markerId, () => {
           canvas.style.cursor = 'move'
+
+          if (this.label) popup.setLngLat(this.position).setHTML(this.label).addTo(map)
         })
         map.on('mouseleave', this.markerId, () => {
           canvas.style.cursor = ''
+
+          if (this.label) popup.remove()
         })
         map.on('mousedown', this.markerId, e => {
           e.preventDefault()
@@ -124,6 +122,13 @@ export default {
           const onMove = e => this.onMove(e, map)
           map.on('mousemove', onMove)
           map.once('mouseup', e => this.onUp(e, map, onMove))
+        })
+      } else {
+        map.on('mouseenter', this.markerId, () => {
+          if (this.label) popup.setLngLat(this.position).setHTML(this.label).addTo(map)
+        })
+        map.on('mouseleave', this.markerId, () => {
+          if (this.label) popup.remove()
         })
       }
     },
