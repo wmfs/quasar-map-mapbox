@@ -1,3 +1,15 @@
+# [1.10.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.9.0...v1.10.0) (2019-11-14)
+
+
+### ✨ Features
+
+* allow map to be centred to geo location by default ([](https://github.com/wmfs/quasar-map-mapbox/commit/9fd3e9c))
+
+
+### 🛠 Builds
+
+* **deps-dev:** update dev dependancies ([](https://github.com/wmfs/quasar-map-mapbox/commit/8c45ad7))
+
 # [1.9.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.8.0...v1.9.0) (2019-08-28)
 
 
