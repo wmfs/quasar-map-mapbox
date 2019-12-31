@@ -1,3 +1,12 @@
+# [1.12.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.11.0...v1.12.0) (2019-12-31)
+
+
+### 🛠 Builds
+
+* **deps:** [security] bump lodash.template from 4.4.0 to 4.5.0 ([e3ac869](https://github.com/wmfs/quasar-map-mapbox/commit/e3ac8690a21b51d5e93f835f848a63af374eff20))
+* **deps-dev:** bump packages ([891f4f9](https://github.com/wmfs/quasar-map-mapbox/commit/891f4f91acde85124a2fb87ddcb46326d6b019b1))
+* **deps-dev:** bump standard from 12.0.1 to 14.3.1 ([fe6a23b](https://github.com/wmfs/quasar-map-mapbox/commit/fe6a23bca7ad71ae002ac7bfab825c76bcc5c98c))
+
 # [1.11.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.10.0...v1.11.0) (2019-11-14)
 
 
