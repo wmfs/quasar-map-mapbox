@@ -1,3 +1,14 @@
+# [1.13.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.12.0...v1.13.0) (2020-01-27)
+
+
+### 🛠 Builds
+
+* **deps:** bump mapbox-gl from 0.53.1 to 1.6.1 ([899b377](https://github.com/wmfs/quasar-map-mapbox/commit/899b377d4a7191c0089d1d9165104abd5fe4ca24))
+* **deps-dev:** bump codecov from 3.6.1 to 3.6.2 ([15b8af7](https://github.com/wmfs/quasar-map-mapbox/commit/15b8af7af527f133335e49d39ea971d96d84a4e1))
+* **deps-dev:** bump conventional-changelog-metahub from 3.0.0 to 4.0.0 ([142fe79](https://github.com/wmfs/quasar-map-mapbox/commit/142fe79d4c2e09b8873967b0018a34eab64df77d))
+* **deps-dev:** bump mocha from 6.2.2 to 7.0.0 ([8fab5fd](https://github.com/wmfs/quasar-map-mapbox/commit/8fab5fd78b3d342500439de6d2927b64afd03bfb))
+* **deps-dev:** bump mocha from 7.0.0 to 7.0.1 ([7e4b55b](https://github.com/wmfs/quasar-map-mapbox/commit/7e4b55b6ecb665ae9f114eb844e5eab2af3fb855))
+
 # [1.12.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.11.0...v1.12.0) (2019-12-31)
 
 
