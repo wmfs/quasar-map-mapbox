@@ -1,3 +1,18 @@
+## [1.14.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.14.0...v1.14.1) (2020-02-05)
+
+
+### 🐛 Bug Fixes
+
+* load mapboxgl css file dynamically to keep version up-to-date [#21](https://github.com/wmfs/quasar-map-mapbox/issues/21) ([55f3a7c](https://github.com/wmfs/quasar-map-mapbox/commit/55f3a7c6111d5640e2623d5b60aaac08341b861a))
+
+
+### 🛠 Builds
+
+* **deps-dev:** bump codecov from 3.6.2 to 3.6.3 ([db9ce1e](https://github.com/wmfs/quasar-map-mapbox/commit/db9ce1e7ea6e4cb23241bba61f9aae5eaf65641c))
+* **deps-dev:** bump codecov from 3.6.3 to 3.6.4 ([ba3960d](https://github.com/wmfs/quasar-map-mapbox/commit/ba3960d809b3069b38b33a13246250a175a5285e))
+* **deps-dev:** bump cz-conventional-changelog from 3.0.2 to 3.0.3 ([69903e3](https://github.com/wmfs/quasar-map-mapbox/commit/69903e38170a4245ae2be07d2fe5943d0fc0d2b0))
+* **deps-dev:** bump cz-conventional-changelog from 3.0.3 to 3.1.0 ([1fc8453](https://github.com/wmfs/quasar-map-mapbox/commit/1fc8453654b43c3f11fb81df80625dddf1565f7a))
+
 # [1.14.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.13.0...v1.14.0) (2020-01-28)
 
 
