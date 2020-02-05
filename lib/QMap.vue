@@ -3,22 +3,11 @@
     <div
       :style="$q.screen.gt.sm ? `padding: 0px; height: 50vh;` : `padding: 0px; height: 300px;`"
     >
-      <div id="map"></div>
+      <div id="map" style="top: 0; bottom: 0; height: 100%; width: 100%;"></div>
       <slot></slot>
     </div>
   </div>
 </template>
-
-<style scoped>
-  #map {
-    top: 0;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
-  }
-
-  @import url(https://api.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css);
-</style>
 
 <script>
 import mapboxgl from 'mapbox-gl'
@@ -42,6 +31,12 @@ export default {
     }
   }, // data
   async mounted () {
+    let mapboxglCss = document.createElement('link')
+    mapboxglCss.type = 'text/css'
+    mapboxglCss.rel = 'stylesheet'
+    mapboxglCss.href = `https://api.mapbox.com/mapbox-gl-js/${mapboxgl.version}/mapbox-gl.css`
+    document.head.appendChild(mapboxglCss)
+
     this.components = findComponents(this)
 
     this.ready = true
