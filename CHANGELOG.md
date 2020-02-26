@@ -1,3 +1,15 @@
+# [1.15.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.14.1...v1.15.0) (2020-02-26)
+
+
+### 🛠 Builds
+
+* **deps:** bump mapbox-gl from 1.7.0 to 1.8.0 ([2ccc2dd](https://github.com/wmfs/quasar-map-mapbox/commit/2ccc2ddc60a7c42e5556f578e5c8fdca10d70767))
+* **deps-dev:** bump [@semantic-release](https://github.com/semantic-release)/git from 7.0.18 to 9.0.0 ([2b0188c](https://github.com/wmfs/quasar-map-mapbox/commit/2b0188ccf1014d66a166ef9bfebf02bfd98cf6d9))
+* **deps-dev:** bump codecov from 3.6.4 to 3.6.5 ([f18ed94](https://github.com/wmfs/quasar-map-mapbox/commit/f18ed94fdd09d4e3da1862e4d268bc165fb660a8))
+* **deps-dev:** bump conventional-changelog-metahub from 4.0.0 to 4.0.1 ([7d9746b](https://github.com/wmfs/quasar-map-mapbox/commit/7d9746b5fe53a24b64078b1fcd688bf1437f54ee))
+* **deps-dev:** bump semantic-release from 15.14.0 to 17.0.3 ([bc07d1a](https://github.com/wmfs/quasar-map-mapbox/commit/bc07d1ab30c7a341fbab042a6f9cd15d10ff187b))
+* **deps-dev:** bump semantic-release from 17.0.3 to 17.0.4 ([9152171](https://github.com/wmfs/quasar-map-mapbox/commit/915217151b91b853176bd363754983ebe06214f9))
+
 ## [1.14.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.14.0...v1.14.1) (2020-02-05)
 
 
