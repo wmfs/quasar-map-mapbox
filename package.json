@@ -11,7 +11,7 @@
   "dependencies": {
     "geodesy": "2.2.0",
     "lodash.template": "4.5.0",
-    "mapbox-gl": "1.8.1"
+    "mapbox-gl": "1.9.0"
   },
   "devDependencies": {
     "chai": "4.2.0",
