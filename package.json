@@ -9,7 +9,7 @@
   ],
   "main": "lib/QMap.vue",
   "dependencies": {
-    "geodesy": "2.2.0",
+    "geodesy": "2.2.1",
     "lodash.template": "4.5.0",
     "mapbox-gl": "1.8.1"
   },
