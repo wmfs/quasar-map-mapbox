@@ -1,3 +1,22 @@
+# [1.17.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.16.0...v1.17.0) (2020-05-31)
+
+
+### 🛠 Builds
+
+* **deps:** bump geodesy from 2.2.0 to 2.2.1 ([60a7f19](https://github.com/wmfs/quasar-map-mapbox/commit/60a7f19e6791830d987231c6ea67d9e5a7632ac3))
+* **deps-dev:** bump [@semantic-release](https://github.com/semantic-release)/changelog from 5.0.0 to 5.0.1 ([b379fea](https://github.com/wmfs/quasar-map-mapbox/commit/b379fea8248af36f6675766e52c06a6df354571a))
+* **deps-dev:** bump cz-conventional-changelog from 3.1.0 to 3.2.0 ([de5cbf1](https://github.com/wmfs/quasar-map-mapbox/commit/de5cbf13b091dccf7a582065ede2ddd174345fc8))
+* **deps-dev:** bump mocha from 7.1.0 to 7.1.1 ([a889d84](https://github.com/wmfs/quasar-map-mapbox/commit/a889d84ccba1f99793b2fc57889282ba779d9c28))
+* **deps-dev:** bump semantic-release from 17.0.4 to 17.0.7 ([456b5a8](https://github.com/wmfs/quasar-map-mapbox/commit/456b5a8c04b40d2eb21544e4742dbe98a5893cdc))
+* **deps-dev:** bump semantic-release from 17.0.7 to 17.0.8 ([68ebfce](https://github.com/wmfs/quasar-map-mapbox/commit/68ebfce01eaa31b138fd9a6a5882eb31f5dae18d))
+* **deps-dev:** bump standard from 14.3.1 to 14.3.2 ([5a98535](https://github.com/wmfs/quasar-map-mapbox/commit/5a985357833f9cc2fa2a17c6beff9e5648e155e3))
+* **deps-dev:** bump standard from 14.3.2 to 14.3.3 ([c712e38](https://github.com/wmfs/quasar-map-mapbox/commit/c712e386679163c70bea10296f2a0213e0427f29))
+
+
+### ⚙️ Continuous Integrations
+
+* **circle:** add context env var config to config.yml ([c5bae49](https://github.com/wmfs/quasar-map-mapbox/commit/c5bae49add58488f93ba8c7144012a379b597f9e))
+
 # [1.16.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.15.0...v1.16.0) (2020-02-26)
 
 
