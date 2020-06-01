@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.17.0...v1.18.0) (2020-06-01)
+
+
+### 🛠 Builds
+
+* **deps:** bump mapbox-gl from 1.8.1 to 1.10.1 ([6ab6a19](https://github.com/wmfs/quasar-map-mapbox/commit/6ab6a1941481ecec6ea28b4936ab7c0618a1b7ee))
+
 # [1.17.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.16.0...v1.17.0) (2020-05-31)
 
 
