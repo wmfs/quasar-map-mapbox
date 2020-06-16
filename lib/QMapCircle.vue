@@ -103,18 +103,23 @@ export default {
       )
 
       const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false })
+      const canvas = map.getCanvasContainer()
+
+      const addPopup = (cursor) => {
+        if (cursor) canvas.style.cursor = cursor
+        if (this.label) popup.setLngLat(this.position).setHTML(this.label).addTo(map)
+      }
+      const removePopup = (cursor) => {
+        if (cursor) canvas.style.cursor = cursor
+        if (this.label) popup.remove()
+      }
 
       if (!this.locked && !map.locked) {
-        const canvas = map.getCanvasContainer()
         map.on('mouseenter', this.markerId, () => {
-          canvas.style.cursor = 'move'
-
-          if (this.label) popup.setLngLat(this.position).setHTML(this.label).addTo(map)
+          addPopup('move')
         })
         map.on('mouseleave', this.markerId, () => {
-          canvas.style.cursor = ''
-
-          if (this.label) popup.remove()
+          removePopup('')
         })
         map.on('mousedown', this.markerId, e => {
           e.preventDefault()
@@ -125,10 +130,10 @@ export default {
         })
       } else {
         map.on('mouseenter', this.markerId, () => {
-          if (this.label) popup.setLngLat(this.position).setHTML(this.label).addTo(map)
+          addPopup('pointer')
         })
         map.on('mouseleave', this.markerId, () => {
-          if (this.label) popup.remove()
+          removePopup('')
         })
       }
     },
