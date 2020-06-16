@@ -1,3 +1,15 @@
+## [1.18.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.18.0...v1.18.1) (2020-06-16)
+
+
+### 🐛 Bug Fixes
+
+* missing 'v' prefix on version in mapbox url ([450bc09](https://github.com/wmfs/quasar-map-mapbox/commit/450bc09c5c84a5d64bde02b3a8b2b5b14710509c))
+
+
+### 📦 Code Refactoring
+
+* tidy up marker pop up code ([ab35cba](https://github.com/wmfs/quasar-map-mapbox/commit/ab35cbaa8af4836ac9228e4548826233dc20425a))
+
 # [1.18.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.17.0...v1.18.0) (2020-06-01)
 
 
