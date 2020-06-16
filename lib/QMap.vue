@@ -34,7 +34,12 @@ export default {
     let mapboxglCss = document.createElement('link')
     mapboxglCss.type = 'text/css'
     mapboxglCss.rel = 'stylesheet'
-    mapboxglCss.href = `https://api.mapbox.com/mapbox-gl-js/${mapboxgl.version}/mapbox-gl.css`
+    mapboxglCss.href = `https://api.mapbox.com/mapbox-gl-js/v${mapboxgl.version}/mapbox-gl.css`
+
+    let mapboxglJs = document.createElement('script')
+    mapboxglJs.src = `https://api.mapbox.com/mapbox-gl-js/v${mapboxgl.version}/mapbox-gl.js`
+
+    document.head.appendChild(mapboxglJs)
     document.head.appendChild(mapboxglCss)
 
     this.components = findComponents(this)
