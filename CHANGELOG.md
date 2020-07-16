@@ -1,3 +1,21 @@
+# [1.19.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.18.1...v1.19.0) (2020-07-16)
+
+
+### 🛠 Builds
+
+* **deps:** bump mapbox-gl from 1.10.1 to 1.11.1 ([a31d627](https://github.com/wmfs/quasar-map-mapbox/commit/a31d627ebc34c4511ea754db0538c106984ad7cb))
+* **deps-dev:** bump codecov from 3.6.5 to 3.7.0 ([fe265ae](https://github.com/wmfs/quasar-map-mapbox/commit/fe265aed19e6bcef62f60438614444ab1549fa97))
+* **deps-dev:** bump mocha from 7.1.1 to 8.0.1 ([ed546ac](https://github.com/wmfs/quasar-map-mapbox/commit/ed546ac0d11b5f63fe2b2f23fac9b9df6ac10fe1))
+* **deps-dev:** bump nyc from 15.0.0 to 15.1.0 ([37e1ac4](https://github.com/wmfs/quasar-map-mapbox/commit/37e1ac40680c9a2ba3e42725c42e40f725fba0a4))
+* **deps-dev:** bump semantic-release from 17.0.8 to 17.1.0 ([9d96783](https://github.com/wmfs/quasar-map-mapbox/commit/9d967834d1315316f9bb8bbde36f8f84841f2a27))
+* **deps-dev:** bump semantic-release from 17.1.0 to 17.1.1 ([1204148](https://github.com/wmfs/quasar-map-mapbox/commit/12041485f1484ea303da9f57471c1a4eebd16660))
+* **deps-dev:** bump standard from 14.3.3 to 14.3.4 ([daf3079](https://github.com/wmfs/quasar-map-mapbox/commit/daf3079e15dafc0345223ba1746f46db8079b887))
+
+
+### ⚙️ Continuous Integrations
+
+* **circle:** use updated circle node image [skip ci] ([995911c](https://github.com/wmfs/quasar-map-mapbox/commit/995911cc9f5e3d82bfb7bb448ba8433b3b47b0c9))
+
 ## [1.18.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.18.0...v1.18.1) (2020-06-16)
 
 
