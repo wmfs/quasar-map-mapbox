@@ -22,7 +22,8 @@ export default {
     'color',
     'id',
     'showMarker',
-    'label'
+    'label',
+    'locked'
   ],
   data () {
     let latitude = this.latitude || 0
