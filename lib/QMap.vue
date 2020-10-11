@@ -134,8 +134,10 @@ async function findCentre (qmap, components) {
   }
 
   const allPositions = components
+    .filter(c => c.show)
     .map(c => c.position)
-    .filter(c => c)
+    .filter(p => p)
+
 
   if (allPositions.length) {
     if (allPositions.length === 1) {

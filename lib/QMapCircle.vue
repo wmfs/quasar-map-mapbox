@@ -22,7 +22,8 @@ export default {
     'color',
     'id',
     'showMarker',
-    'label'
+    'label',
+    'locked'
   ],
   data () {
     let latitude = this.latitude || 0
@@ -45,6 +46,7 @@ export default {
       markerId: this.id || `${this._uid}`,
       markerColour: this.color || locationColour,
       position: [longitude, latitude],
+      show: this.showMarker,
       map: null
     }
   },
