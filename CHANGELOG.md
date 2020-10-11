@@ -1,3 +1,20 @@
+## [1.20.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.20.0...v1.20.1) (2020-10-11)
+
+
+### 🐛 Bug Fixes
+
+* Add QMapCircle locked prop. ([3f24b0e](https://github.com/wmfs/quasar-map-mapbox/commit/3f24b0ed3a53de7e0b2c650235fccb91fc24527b))
+* expose show property on QMapCircle. Detect that in QMap to set bounds properly ([8fa3812](https://github.com/wmfs/quasar-map-mapbox/commit/8fa3812e012f4a8c2d820374659fb0878c21d42c))
+
+
+### 🛠 Builds
+
+* **deps-dev:** bump codecov from 3.7.2 to 3.8.0 ([692a469](https://github.com/wmfs/quasar-map-mapbox/commit/692a469575244d5fa4b9cfddb221d60ef0cee3e7))
+* **deps-dev:** bump cz-conventional-changelog from 3.2.0 to 3.3.0 ([efc7ea8](https://github.com/wmfs/quasar-map-mapbox/commit/efc7ea8c02ebb3527b06eb668658703cc8e5384b))
+* **deps-dev:** bump mocha from 8.0.1 to 8.1.1 ([d4104dd](https://github.com/wmfs/quasar-map-mapbox/commit/d4104dd27e8c18ccc2ec1ec1932ddb5e6248b585))
+* **deps-dev:** bump mocha from 8.1.1 to 8.1.3 ([ce13e13](https://github.com/wmfs/quasar-map-mapbox/commit/ce13e13ca95440d7d54a0ceac3a9dce87405836a))
+* **deps-dev:** bump semantic-release from 17.1.1 to 17.1.2 ([9204bed](https://github.com/wmfs/quasar-map-mapbox/commit/9204bed182ec2153537082188a24a6eede8d1694))
+
 # [1.20.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.19.0...v1.20.0) (2020-08-17)
 
 
