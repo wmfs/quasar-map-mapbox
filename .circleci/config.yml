@@ -3,6 +3,9 @@ jobs:
   build:
     docker:
       - image: cimg/node:lts
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
         environment:
           TZ: "Europe/London"
     working_directory: ~/repo
@@ -21,7 +24,9 @@ workflows:
   release:
     jobs:
       - build:
-          context: tymly_global
+          context:
+            - docker-hub-creds
+            - tymly_global
           filters:
             branches:
               only: master
