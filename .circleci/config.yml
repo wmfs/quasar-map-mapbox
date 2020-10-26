@@ -26,7 +26,7 @@ workflows:
       - build:
           context:
             - docker-hub-creds
-            - tymly_global
+            - build-env-vars
           filters:
             branches:
               only: master
