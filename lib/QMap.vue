@@ -6,6 +6,15 @@
       <div id="map" style="top: 0; bottom: 0; height: 100%; width: 100%;"></div>
       <slot></slot>
     </div>
+    <div class="q-mb-sm q-mt-sm text-center">
+      <q-btn-toggle
+        v-model="mode"
+        :options="modeOptions"
+        toggle-color="primary"
+        size="sm"
+        @input="render"
+      />
+    </div>
   </div>
 </template>
 
@@ -27,7 +36,12 @@ export default {
     return {
       ready: false,
       map: null,
-      mode: 'streets'
+      mode: 'streets',
+      modeOptions: [
+        { label: 'Streets', value: 'streets' },
+        { label: 'Satellite', value: 'satellite' },
+        { label: '3D Buildings', value: '3d' }
+      ]
     }
   }, // data
   async mounted () {
