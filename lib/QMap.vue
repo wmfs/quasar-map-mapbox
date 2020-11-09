@@ -1,20 +1,32 @@
 <template>
   <div>
-    <div
-      :style="$q.screen.gt.sm ? `padding: 0px; height: 50vh;` : `padding: 0px; height: 300px;`"
-    >
-      <div id="map" style="top: 0; bottom: 0; height: 100%; width: 100%;"></div>
-      <slot></slot>
-    </div>
-    <div class="q-mb-sm q-mt-sm text-center">
-      <q-btn-toggle
-        v-model="mode"
-        :options="modeOptions"
-        toggle-color="primary"
-        size="sm"
-        @input="render"
-      />
-    </div>
+    <q-card class="q-mb-md">
+      <q-card-section class="q-pa-none">
+        <div :style="$q.screen.gt.sm ? `padding: 0px; height: 50vh;` : `padding: 0px; height: 300px;`">
+          <div id="map" style="top: 0; bottom: 0; height: 100%; width: 100%;"></div>
+          <slot></slot>
+        </div>
+      </q-card-section>
+
+      <q-card-actions align="around">
+        <!--<q-toggle-->
+          <!--v-model="locked"-->
+          <!--checked-icon="lock"-->
+          <!--unchecked-icon="lock_open"-->
+          <!--color="primary"-->
+          <!--@input="render"-->
+          <!--class="q-mr-md"-->
+        <!--/>-->
+
+        <q-btn-toggle
+                v-model="mode"
+                :options="modeOptions"
+                toggle-color="primary"
+                size="sm"
+                @input="render"
+        />
+      </q-card-actions>
+    </q-card>
   </div>
 </template>
 
