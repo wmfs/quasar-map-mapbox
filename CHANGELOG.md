@@ -1,3 +1,24 @@
+# [1.21.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.20.1...v1.21.0) (2020-11-09)
+
+
+### ✨ Features
+
+* comment out lock toggle and use q-card to present map ([974fc5d](https://github.com/wmfs/quasar-map-mapbox/commit/974fc5df8e6882117315b49f0e411e12cd0c2ad5))
+* toggle street/satellite/3D view ([76c472c](https://github.com/wmfs/quasar-map-mapbox/commit/76c472ca3d617ebb4a9841bff398d84d2263c15f))
+
+
+### 🛠 Builds
+
+* **deps-dev:** bump semantic-release from 17.1.2 to 17.2.0 ([4ae4d25](https://github.com/wmfs/quasar-map-mapbox/commit/4ae4d25c031ddd899c6b568b5234f5f5d66015b9))
+* **deps-dev:** bump semantic-release from 17.2.0 to 17.2.1 ([41e9e2f](https://github.com/wmfs/quasar-map-mapbox/commit/41e9e2f958cfc0da1f1829bfbb630689fbd69b22))
+* **deps-dev:** bump standard from 14.3.4 to 15.0.0 ([9e15553](https://github.com/wmfs/quasar-map-mapbox/commit/9e15553848cdecd406a7d6324e3e2b143d4a0b40))
+
+
+### ⚙️ Continuous Integrations
+
+* **circle:** authenticate Docker image pull [ch2767] ([70cb266](https://github.com/wmfs/quasar-map-mapbox/commit/70cb266f53c6d10ddadd15869178ab1ad654dc30))
+* **circle:** update build environment variable context name [ch2771] ([1b84064](https://github.com/wmfs/quasar-map-mapbox/commit/1b8406462da601c852a3250669766ec530ddf8b1))
+
 ## [1.20.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.20.0...v1.20.1) (2020-10-11)
 
 
