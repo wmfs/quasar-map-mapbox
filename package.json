@@ -14,7 +14,7 @@
     "mapbox-gl": "1.12.0"
   },
   "devDependencies": {
-    "chai": "4.2.0",
+    "chai": "4.3.0",
     "codecov": "3.8.1",
     "conventional-changelog-metahub": "4.0.1",
     "cz-conventional-changelog": "3.3.0",
