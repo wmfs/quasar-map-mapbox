@@ -1,0 +1,35 @@
+version: 2
+registries:
+  npm-registry-registry-npmjs-org:
+    type: npm-registry
+    url: https://registry.npmjs.org
+    token: "${{secrets.NPM_REGISTRY_REGISTRY_NPMJS_ORG_TOKEN}}"
+
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "01:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: mapbox-gl
+    versions:
+    - 1.13.1
+    - 2.0.1
+    - 2.1.0
+    - 2.1.1
+  - dependency-name: mocha
+    versions:
+    - 8.3.1
+  - dependency-name: chai
+    versions:
+    - 4.3.1
+    - 4.3.2
+    - 4.3.3
+  - dependency-name: semantic-release
+    versions:
+    - 17.3.8
+    - 17.4.0
+  registries:
+  - npm-registry-registry-npmjs-org
