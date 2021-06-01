@@ -8,7 +8,7 @@ import mapboxgl from 'mapbox-gl'
 import { throttle } from 'quasar'
 import OsGridRef, { LatLon } from 'geodesy/osgridref.js'
 
-const locationColour = '#2222B4'
+const locationColour = '#443DF6'
 // const prevLocationColour = '#6666D8'
 
 export default {
