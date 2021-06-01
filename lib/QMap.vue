@@ -57,16 +57,8 @@ export default {
     }
   }, // data
   async mounted () {
-    let mapboxglCss = document.createElement('link')
-    mapboxglCss.type = 'text/css'
-    mapboxglCss.rel = 'stylesheet'
-    mapboxglCss.href = `https://api.mapbox.com/mapbox-gl-js/v${mapboxgl.version}/mapbox-gl.css`
-
-    let mapboxglJs = document.createElement('script')
-    mapboxglJs.src = `https://api.mapbox.com/mapbox-gl-js/v${mapboxgl.version}/mapbox-gl.js`
-
-    document.head.appendChild(mapboxglJs)
-    document.head.appendChild(mapboxglCss)
+    this.ensureMapboxCss()
+    this.ensureMapboxJs()
 
     this.components = findComponents(this)
 
@@ -83,6 +75,29 @@ export default {
     this.destroyMap()
   }, // beforeDestroy
   methods: {
+    ensureMapboxCss () {
+      const exists = document.getElementById('MAPBOX_CSS_SCRIPT')
+
+      if (!exists) {
+        const mapboxglCss = document.createElement('link')
+        mapboxglCss.type = 'text/css'
+        mapboxglCss.rel = 'stylesheet'
+        mapboxglCss.href = `https://api.mapbox.com/mapbox-gl-js/v${mapboxgl.version}/mapbox-gl.css`
+
+        document.head.appendChild(mapboxglCss)
+      }
+    },
+    ensureMapboxJs () {
+      const exists = document.getElementById('MAPBOX_JS_SCRIPT')
+
+      if (!exists) {
+        const mapboxglJs = document.createElement('script')
+        mapboxglJs.id = 'MAPBOX_JS_SCRIPT'
+        mapboxglJs.src = `https://api.mapbox.com/mapbox-gl-js/v${mapboxgl.version}/mapbox-gl.js`
+
+        document.head.appendChild(mapboxglJs)
+      }
+    },
     onLoad () {
       this.map.locked = this.locked
       this.components.forEach(s => {
