@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-card class="q-mb-md">
+    <q-card class="q-mb-md" flat>
       <q-card-section class="q-pa-none">
         <div :style="$q.screen.gt.sm ? `padding: 0px; height: 50vh;` : `padding: 0px; height: 300px;`">
           <div id="map" style="top: 0; bottom: 0; height: 100%; width: 100%;"></div>
@@ -21,9 +21,14 @@
         <q-btn-toggle
                 v-model="mode"
                 :options="modeOptions"
-                toggle-color="primary"
                 size="sm"
                 @input="render"
+                unelevated
+                toggle-color="accent"
+                toggle-text-color="black"
+                color="white"
+                text-color="black"
+                style="border: 1px solid black;"
         />
       </q-card-actions>
     </q-card>
