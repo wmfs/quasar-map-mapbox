@@ -10,25 +10,25 @@
 
       <q-card-actions align="around">
         <!--<q-toggle-->
-          <!--v-model="locked"-->
-          <!--checked-icon="lock"-->
-          <!--unchecked-icon="lock_open"-->
-          <!--color="primary"-->
-          <!--@input="render"-->
-          <!--class="q-mr-md"-->
+        <!--v-model="locked"-->
+        <!--checked-icon="lock"-->
+        <!--unchecked-icon="lock_open"-->
+        <!--color="primary"-->
+        <!--@input="render"-->
+        <!--class="q-mr-md"-->
         <!--/>-->
 
         <q-btn-toggle
-                v-model="mode"
-                :options="modeOptions"
-                size="sm"
-                @input="render"
-                unelevated
-                toggle-color="accent"
-                toggle-text-color="black"
-                color="white"
-                text-color="black"
-                style="border: 1px solid black;"
+            v-model="mode"
+            :options="modeOptions"
+            size="sm"
+            @input="render"
+            unelevated
+            toggle-color="accent"
+            toggle-text-color="black"
+            color="white"
+            text-color="black"
+            style="border: 1px solid black;"
         />
       </q-card-actions>
     </q-card>
@@ -47,6 +47,7 @@ export default {
     'centre-longitude',
     'centre-latitude',
     'locked',
+    'draggable',
     'id'
   ],
   data () {
@@ -62,6 +63,8 @@ export default {
     }
   }, // data
   async mounted () {
+    if (!this.locked) this.draggable = true
+
     this.ensureMapboxCss()
     this.ensureMapboxJs()
 
@@ -116,8 +119,8 @@ export default {
         container: 'map', // container id
         center: centre,
         bounds: bounds,
-        fitBoundsOptions: {padding: 20},
-        interactive: !this.locked,
+        fitBoundsOptions: { padding: 20 },
+        interactive: this.draggable,
         zoom: 16
       }
 
@@ -180,10 +183,9 @@ async function findCentre (qmap, components) {
   }
 
   const allPositions = components
-    .filter(c => c.show)
-    .map(c => c.position)
-    .filter(p => p)
-
+      .filter(c => c.show)
+      .map(c => c.position)
+      .filter(p => p)
 
   if (allPositions.length) {
     if (allPositions.length === 1) {
@@ -203,8 +205,8 @@ function findComponents (qmap) {
   if (!qmap.$slots || !qmap.$slots.default) return []
 
   return qmap.$slots.default
-    .map(c => c.componentInstance)
-    .filter(c => c)
+      .map(c => c.componentInstance)
+      .filter(c => c)
 } // findComponents
 
 function bounds (allPositions) {
@@ -214,18 +216,18 @@ function bounds (allPositions) {
   ]
 } // bounds
 
-function minOf(allPositions, index) {
+function minOf (allPositions, index) {
   return findOf(allPositions, index, Math.min)
 } // minOf
 
-function maxOf(allPositions, index) {
+function maxOf (allPositions, index) {
   return findOf(allPositions, index, Math.max)
 } // maxOf
 
-function findOf(allPositions, index, fn) {
+function findOf (allPositions, index, fn) {
   const p = allPositions
-    .map(p => p[index])
-    .map(p => Number(p))
+      .map(p => p[index])
+      .map(p => Number(p))
   return fn(...p)
 } // findOf
 
