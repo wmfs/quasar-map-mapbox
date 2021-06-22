@@ -1,3 +1,49 @@
+# [1.22.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.21.0...v1.22.0) (2021-06-22)
+
+
+### ✨ Features
+
+* flat style card and button toggle ([824d276](https://github.com/wmfs/quasar-map-mapbox/commit/824d276cb695be0f2f31065604c3c0882da59492))
+* new draggable prop, sets to true if locked is false ([9a819d2](https://github.com/wmfs/quasar-map-mapbox/commit/9a819d20358d2e81019b037341187e2c9ac325e4))
+
+
+### 🐛 Bug Fixes
+
+* draggable not editable ([f506262](https://github.com/wmfs/quasar-map-mapbox/commit/f506262f5ddf8486bd26d1c1c6dc3613d04c3e4e))
+* unique map container id ([4536cbb](https://github.com/wmfs/quasar-map-mapbox/commit/4536cbbd5fe893952bc64044910d456d8c8a47ea))
+* update marker colour ([483f772](https://github.com/wmfs/quasar-map-mapbox/commit/483f772d74581d88316b5c39e5222fd4fd1746d9))
+* uuid can be assigned straight to container id ([cf26fc9](https://github.com/wmfs/quasar-map-mapbox/commit/cf26fc9361b667c07b303425583d9d19510201ed))
+
+
+### 🛠 Builds
+
+* **deps-dev:** [security] bump semantic-release from 17.2.1 to 17.3.0 ([fe2f2d2](https://github.com/wmfs/quasar-map-mapbox/commit/fe2f2d2b80fdf99a39616c1cb554e62f9a2275bb))
+* **deps-dev:** bump chai from 4.2.0 to 4.3.0 ([6ddc068](https://github.com/wmfs/quasar-map-mapbox/commit/6ddc0683718eeda920cb8822d70af7a5c07ac2fa))
+* **deps-dev:** bump chai from 4.3.0 to 4.3.4 ([a2fa4fb](https://github.com/wmfs/quasar-map-mapbox/commit/a2fa4fba3453f47a91a75f888727ebfcaf20de62))
+* **deps-dev:** bump codecov from 3.8.0 to 3.8.1 ([a840d28](https://github.com/wmfs/quasar-map-mapbox/commit/a840d2897547a7b0ad3a763f41dfad1c5bb83a04))
+* **deps-dev:** bump codecov from 3.8.1 to 3.8.2 ([635a9da](https://github.com/wmfs/quasar-map-mapbox/commit/635a9da23f312695b2edf8eef9c43d587566fda7))
+* **deps-dev:** bump mocha from 8.1.3 to 8.2.1 ([1d4e727](https://github.com/wmfs/quasar-map-mapbox/commit/1d4e727bd28539818feed3a5afbcfa33aaf66b4c))
+* **deps-dev:** bump mocha from 8.2.1 to 8.3.0 ([2254d87](https://github.com/wmfs/quasar-map-mapbox/commit/2254d872e2b8139adccac499ce42b868a5562d06))
+* **deps-dev:** bump mocha from 8.3.0 to 8.3.2 ([a7eb4dc](https://github.com/wmfs/quasar-map-mapbox/commit/a7eb4dcee0c405a8dfe59fe9ef5e6177c84e12f8))
+* **deps-dev:** bump mocha from 8.3.2 to 8.4.0 ([da3786f](https://github.com/wmfs/quasar-map-mapbox/commit/da3786ff2b5edb495f50b6dafdccba980b72e7a2))
+* **deps-dev:** bump semantic-release from 17.3.0 to 17.3.1 ([c47507c](https://github.com/wmfs/quasar-map-mapbox/commit/c47507ca859cc3a55fa129ed83175b5906fe1cd0))
+* **deps-dev:** bump semantic-release from 17.3.1 to 17.3.2 ([3be6594](https://github.com/wmfs/quasar-map-mapbox/commit/3be65947865000f3937f9299e7d0f9453a2fcea4))
+* **deps-dev:** bump semantic-release from 17.3.2 to 17.3.3 ([3e65739](https://github.com/wmfs/quasar-map-mapbox/commit/3e65739d17e8a756656280ad9037f6a2efaf3f5d))
+* **deps-dev:** bump semantic-release from 17.3.3 to 17.3.4 ([2e1e449](https://github.com/wmfs/quasar-map-mapbox/commit/2e1e4498b339d12049a0fd2e5fe4dab51f01b406))
+* **deps-dev:** bump semantic-release from 17.3.4 to 17.3.6 ([aee611c](https://github.com/wmfs/quasar-map-mapbox/commit/aee611c56e9c8e455a901042c375e339d932d0b0))
+* **deps-dev:** bump semantic-release from 17.3.6 to 17.3.7 ([24d9fec](https://github.com/wmfs/quasar-map-mapbox/commit/24d9fec15b733fec96e4daa0fab523eec284abbd))
+* **deps-dev:** bump semantic-release from 17.3.7 to 17.3.9 ([da510ca](https://github.com/wmfs/quasar-map-mapbox/commit/da510ca5721e82b63619ba78ac74f415c80506e1))
+* **deps-dev:** bump semantic-release from 17.3.9 to 17.4.1 ([9dd934e](https://github.com/wmfs/quasar-map-mapbox/commit/9dd934e680a50e6be1d6e3233a7f0ea4b8fdaad7))
+* **deps-dev:** bump semantic-release from 17.4.1 to 17.4.2 ([9b94015](https://github.com/wmfs/quasar-map-mapbox/commit/9b9401588c81c20f2591e918da1781ae25ba92d4))
+* **deps-dev:** bump semantic-release from 17.4.2 to 17.4.3 ([d2e002e](https://github.com/wmfs/quasar-map-mapbox/commit/d2e002e28c5e14f4d301a3282082555940466e0b))
+* **deps-dev:** bump standard from 15.0.0 to 16.0.2 ([2952424](https://github.com/wmfs/quasar-map-mapbox/commit/2952424b1aaa6f8878d3b9d64fac7b52c457959b))
+* **deps-dev:** bump standard from 16.0.2 to 16.0.3 ([82214f5](https://github.com/wmfs/quasar-map-mapbox/commit/82214f5817a0ac447124e21b9dd82e940b0cd069))
+
+
+### 📦 Code Refactoring
+
+* ensure mapbox js/css scripts to avoid duplication ([1ab6350](https://github.com/wmfs/quasar-map-mapbox/commit/1ab635044a60cc6733e5b3b032fd01448a74e3c6))
+
 # [1.21.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.20.1...v1.21.0) (2020-11-09)
 
 
