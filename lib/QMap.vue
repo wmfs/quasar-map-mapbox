@@ -3,7 +3,7 @@
     <q-card class="q-mb-md" flat>
       <q-card-section class="q-pa-none">
         <div :style="$q.screen.gt.sm ? `padding: 0px; height: 50vh;` : `padding: 0px; height: 300px;`">
-          <div id="map" style="top: 0; bottom: 0; height: 100%; width: 100%;"></div>
+          <div :id="containerId" style="top: 0; bottom: 0; height: 100%; width: 100%;"></div>
           <slot></slot>
         </div>
       </q-card-section>
@@ -38,6 +38,7 @@
 <script>
 import mapboxgl from 'mapbox-gl'
 import QMapCircle from './QMapCircle'
+import { v4 as uuidv4 } from 'uuid'
 
 export default {
   name: 'Q-Map',
@@ -52,6 +53,7 @@ export default {
   ],
   data () {
     return {
+      containerId: null,
       ready: false,
       map: null,
       mode: 'streets',
@@ -63,6 +65,7 @@ export default {
     }
   }, // data
   async mounted () {
+    this.containerId = uuidv4()
     if (!this.locked) this.draggable = true
 
     this.ensureMapboxCss()
@@ -116,7 +119,7 @@ export default {
       const [centre, bounds] = await findCentre(this, this.components)
 
       const options = {
-        container: 'map', // container id
+        container: this.containerId,
         center: centre,
         bounds: bounds,
         fitBoundsOptions: { padding: 20 },
