@@ -65,8 +65,6 @@ export default {
     }
   }, // data
   async mounted () {
-    if (!this.locked) this.draggable = true
-
     this.ensureMapboxCss()
     this.ensureMapboxJs()
 
@@ -122,7 +120,7 @@ export default {
         center: centre,
         bounds: bounds,
         fitBoundsOptions: { padding: 20 },
-        interactive: this.draggable,
+        interactive: !this.locked ? true : this.draggable,
         zoom: 16
       }
 
