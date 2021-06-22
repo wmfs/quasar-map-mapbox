@@ -53,7 +53,7 @@ export default {
   ],
   data () {
     return {
-      containerId: null,
+      containerId: uuidv4(),
       ready: false,
       map: null,
       mode: 'streets',
@@ -65,7 +65,6 @@ export default {
     }
   }, // data
   async mounted () {
-    this.containerId = uuidv4()
     if (!this.locked) this.draggable = true
 
     this.ensureMapboxCss()
