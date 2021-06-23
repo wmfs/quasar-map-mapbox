@@ -1,3 +1,10 @@
+## [1.22.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.22.0...v1.22.1) (2021-06-23)
+
+
+### 🐛 Bug Fixes
+
+* handle if getting geolocation failed ([0448663](https://github.com/wmfs/quasar-map-mapbox/commit/04486630e81d8d0b29aed4d955dc6a37fd8f9b95))
+
 # [1.22.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.21.0...v1.22.0) (2021-06-22)
 
 
