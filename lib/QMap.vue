@@ -173,9 +173,13 @@ export default {
 
 async function findCentre (qmap, components) {
   if (qmap.defaultCentreToGeolocation) {
-    const position = await getCurrentPosition()
-    const { latitude, longitude } = position.coords
-    return [[longitude, latitude], null]
+    try {
+      const position = await getCurrentPosition()
+      const { latitude, longitude } = position.coords
+      return [[longitude, latitude], null]
+    } catch (err) {
+      console.log('error getting geolocation')
+    }
   }
 
   if (qmap.centreLongitude && qmap.centreLatitude) {
