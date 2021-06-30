@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.22.1...v1.23.0) (2021-06-30)
+
+
+### ✨ Features
+
+* render vue within mapbox popup ([1bf091c](https://github.com/wmfs/quasar-map-mapbox/commit/1bf091c1cab3bca49178da5d825840752c04e41a))
+
 ## [1.22.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.22.0...v1.22.1) (2021-06-23)
 
 
