@@ -7,6 +7,7 @@
 import mapboxgl from 'mapbox-gl'
 import { throttle } from 'quasar'
 import OsGridRef, { LatLon } from 'geodesy/osgridref.js'
+import Vue from 'vue'
 
 const locationColour = '#443DF6'
 // const prevLocationColour = '#6666D8'
@@ -14,6 +15,8 @@ const locationColour = '#443DF6'
 export default {
   name: 'Q-Mapcircle',
   props: [
+    'data',
+    'm',
     'format',
     'x',
     'y',
@@ -109,7 +112,30 @@ export default {
 
       const addPopup = (cursor) => {
         if (cursor) canvas.style.cursor = cursor
-        if (this.label) popup.setLngLat(this.position).setHTML(this.label).addTo(map)
+        if (this.label) {
+          const popupId = `${this.markerId}-popup`
+          const label = Array.isArray(this.label) ? this.label : [this.label]
+
+          popup
+              .setLngLat(this.position)
+              .setHTML(`<div id="${popupId}"></div>`)
+              .addTo(map)
+
+          const Popup = Vue.extend({
+            template: `<div>${label.map(l => `<div>${l}</div>`).join('')}</div>`,
+            props: ['data', 'm']
+          })
+
+          this.$nextTick(() => {
+            const p = new Popup({
+              propsData: {
+                data: this.data,
+                m: this.m
+              }
+            }).$mount()
+            document.getElementById(popupId).appendChild(p.$el)
+          })
+        }
       }
       const removePopup = (cursor) => {
         if (cursor) canvas.style.cursor = cursor
