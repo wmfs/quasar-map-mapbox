@@ -50,7 +50,8 @@ export default {
       markerColour: this.color || locationColour,
       position: [longitude, latitude],
       show: this.showMarker,
-      map: null
+      map: null,
+      showingPopup: false
     }
   },
   watch: {
@@ -78,97 +79,105 @@ export default {
       this.position = [pWgs84._lon, pWgs84._lat]
 
       setMarker(
-        this.map,
-        this.markerId,
-        this.position,
-        this.markerColour,
-        this.showMarker
+          this.map,
+          this.markerId,
+          this.position,
+          this.markerColour,
+          this.showMarker
       )
     },
     updateLatLon () {
       this.position = [this.longitude, this.latitude]
 
       setMarker(
-        this.map,
-        this.markerId,
-        this.position,
-        this.markerColour,
-        this.showMarker
+          this.map,
+          this.markerId,
+          this.position,
+          this.markerColour,
+          this.showMarker
       )
     },
     onLoad (map) {
       this.map = map
 
       setMarker(
-        map,
-        this.markerId,
-        this.position,
-        this.markerColour,
-        this.showMarker
+          map,
+          this.markerId,
+          this.position,
+          this.markerColour,
+          this.showMarker
       )
 
-      const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false })
+      const popup = new mapboxgl.Popup({ closeButton: true, closeOnMove: true })
       const canvas = map.getCanvasContainer()
 
-      const addPopup = (cursor) => {
-        if (cursor) canvas.style.cursor = cursor
-        if (this.label) {
-          const popupId = `${this.markerId}-popup`
-          const label = Array.isArray(this.label) ? this.label : [this.label]
+      popup.on('close', () => {
+        this.showingPopup = false
+      })
 
-          popup
-              .setLngLat(this.position)
-              .setHTML(`<div id="${popupId}"></div>`)
-              .addTo(map)
+      const addPopup = (e) => {
+        if (this.showingPopup) return
 
-          const Popup = Vue.extend({
-            template: `<div>${label.map(l => `<div>${l}</div>`).join('')}</div>`,
-            props: ['data', 'm']
-          })
+        const popupId = `${this.markerId}-popup`
+        const label = Array.isArray(this.label) ? this.label : [this.label]
 
-          this.$nextTick(() => {
-            const p = new Popup({
-              propsData: {
-                data: this.data,
-                m: this.m
-              }
-            }).$mount()
-            document.getElementById(popupId).appendChild(p.$el)
-          })
-        }
-      }
-      const removePopup = (cursor) => {
-        if (cursor) canvas.style.cursor = cursor
-        if (this.label) popup.remove()
+        popup
+            .setLngLat(this.position)
+            .setHTML(`<div id="${popupId}" class="q-map-popup"></div>`)
+            .addTo(map)
+
+        let template = `<div>`
+        template += label.map(l => `<div>${l}</div>`).join('')
+        template += `</div>`
+
+        const Popup = Vue.extend({
+          template,
+          props: ['data', 'm']
+        })
+
+        this.$nextTick(() => {
+          const p = new Popup({
+            propsData: {
+              data: this.data,
+              m: this.m
+            }
+          }).$mount()
+          document.getElementById(popupId).appendChild(p.$el)
+        })
+
+        this.showingPopup = true
       }
 
       if (!this.locked && !map.locked) {
         map.on('mouseenter', this.markerId, () => {
-          addPopup('move')
-        })
-        map.on('mouseleave', this.markerId, () => {
-          removePopup('')
+          canvas.style.cursor = 'grab'
         })
         map.on('mousedown', this.markerId, e => {
           e.preventDefault()
-          canvas.style.cursor = 'grab'
+          canvas.style.cursor = 'grabbing'
+          popup.remove()
           const onMove = e => this.onMove(e, map)
           map.on('mousemove', onMove)
           map.once('mouseup', e => this.onUp(e, map, onMove))
         })
       } else {
         map.on('mouseenter', this.markerId, () => {
-          addPopup('pointer')
-        })
-        map.on('mouseleave', this.markerId, () => {
-          removePopup('')
+          if (this.label) canvas.style.cursor = 'pointer'
         })
       }
+
+      map.on('click', this.markerId, (e) => {
+        if (this.label) addPopup(e)
+      })
+
+      map.on('mouseleave', this.markerId, () => {
+        canvas.style.cursor = ''
+      })
     },
     onMove (e, map) {
       map.getCanvasContainer().style.cursor = 'grabbing'
 
-      const {lat, lng} = e.lngLat
+      const { lat, lng } = e.lngLat
 
       throttle(() => {
         if (this.format === 'OSGridRef') {
@@ -189,7 +198,6 @@ export default {
     } // onUp
   } // methods
 } // export default
-
 
 function setMarker (map, id, centre, colour, showMarker) {
   if (map.getLayer(id)) {
