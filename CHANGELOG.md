@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.23.0...v1.24.0) (2021-07-05)
+
+
+### ✨ Features
+
+* improve marker popups, better interactivity with draggable markers ([4314ccd](https://github.com/wmfs/quasar-map-mapbox/commit/4314ccdf269d350a8e3cbf39a86fa45fc574d973))
+
 # [1.23.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.22.1...v1.23.0) (2021-06-30)
 
 
