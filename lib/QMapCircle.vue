@@ -5,7 +5,17 @@
 <script>
 // TODO: mapbox marker hard to move on touchscreen when zoomed out
 import mapboxgl from 'mapbox-gl'
-import { throttle } from 'quasar'
+import {
+  throttle,
+  QBtn,
+  QCard,
+  QCardSection,
+  QCardActions,
+  QMenu,
+  QList,
+  QItem,
+  QItemLabel
+} from 'quasar'
 import OsGridRef, { LatLon } from 'geodesy/osgridref.js'
 import Vue from 'vue'
 
@@ -26,7 +36,9 @@ export default {
     'id',
     'showMarker',
     'label',
-    'locked'
+    'locked',
+    'showLaunches',
+    'launches'
   ],
   data () {
     let latitude = this.latitude || 0
@@ -108,15 +120,23 @@ export default {
           this.showMarker
       )
 
-      const popup = new mapboxgl.Popup({ closeButton: true, closeOnMove: true })
+      const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false })
       const canvas = map.getCanvasContainer()
 
       popup.on('close', () => {
         this.showingPopup = false
       })
 
-      const addPopup = (e) => {
+      const removePopup = () => {
+        this.showingPopup = false
+        popup.remove()
+      }
+
+      const addPopup = () => {
         if (this.showingPopup) return
+
+        const otherPopups = document.getElementsByClassName('mapboxgl-popup')
+        if (otherPopups.length) return
 
         const popupId = `${this.markerId}-popup`
         const label = Array.isArray(this.label) ? this.label : [this.label]
@@ -126,13 +146,28 @@ export default {
             .setHTML(`<div id="${popupId}" class="q-map-popup"></div>`)
             .addTo(map)
 
-        let template = `<div>`
-        template += label.map(l => `<div>${l}</div>`).join('')
-        template += `</div>`
+        const launches = this.showLaunches ? getPopupLaunches(this.launches) : ''
+        const template = getPopupTemplate(label, launches)
+
+        const that = this
 
         const Popup = Vue.extend({
           template,
-          props: ['data', 'm']
+          props: ['data', 'm'],
+          components: {
+            QBtn,
+            QCard,
+            QCardSection,
+            QCardActions,
+            QMenu,
+            QList,
+            QItem,
+            QItemLabel
+          },
+          methods: {
+            removePopup () { removePopup() },
+            launch (launchIdx) { that.$emit('launch', that.launches[launchIdx]) }
+          }
         })
 
         this.$nextTick(() => {
@@ -166,8 +201,8 @@ export default {
         })
       }
 
-      map.on('click', this.markerId, (e) => {
-        if (this.label) addPopup(e)
+      map.on('click', this.markerId, () => {
+        if (this.label) addPopup()
       })
 
       map.on('mouseleave', this.markerId, () => {
@@ -246,5 +281,41 @@ function paintCircle (colour) {
     'circle-stroke-opacity': 0.5
   }
 } // paintCircle
+
+function getPopupTemplate (label, launches) {
+  return `<q-card flat>
+    <q-card-actions align="right">
+        <q-btn round dense unelevated icon="close" class="btn-close" size="xs" @click="removePopup()"/>
+    </q-card-actions>
+
+    <q-card-section class="q-pa-none">${label.map(l => `<div>${l}</div>`).join('')}</q-card-section>
+
+    <q-card-actions align="right">${launches}</q-card-actions>
+  </q-card>`
+} // getPopupTemplate
+
+function getPopupLaunches (launches) {
+  if (launches && Array.isArray(launches) && launches.length) {
+    let i = 0
+
+    const items = launches.filter(l => l.title).map(l => {
+      const click = `launch(${i})`
+      i++
+      return `<q-item clickable class="q-pa-md" @click="${click}">
+        <q-item-label>
+          ${l.title}
+        </q-item-label>
+      </q-item>`
+    })
+
+    return `<q-btn round dense unelevated icon="more_vert" class="btn-primary">
+      <q-menu auto-close>
+        <q-list style="min-width: 100px" link>${items}</q-list>
+      </q-menu>
+    </q-btn>`
+  }
+
+  return ''
+} // getPopupLaunches
 
 </script>
