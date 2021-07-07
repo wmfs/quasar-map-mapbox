@@ -1,7 +1,11 @@
 <template>
   <div></div>
 </template>
-
+<style>
+.mapboxgl-popup-content {
+  padding: 0px !important;
+}
+</style>
 <script>
 // TODO: mapbox marker hard to move on touchscreen when zoomed out
 import mapboxgl from 'mapbox-gl'
@@ -283,14 +287,14 @@ function paintCircle (colour) {
 } // paintCircle
 
 function getPopupTemplate (label, launches) {
-  return `<q-card flat>
-    <q-card-actions align="right">
+  return `<q-card flat style="min-width: 80px;">
+    <q-card-actions class="q-pa-sm" align="right">
         <q-btn round dense unelevated icon="close" class="btn-close" size="xs" @click="removePopup()"/>
     </q-card-actions>
 
-    <q-card-section class="q-pa-none">${label.map(l => `<div>${l}</div>`).join('')}</q-card-section>
+    <q-card-section class="q-py-none q-px-sm">${label.map(l => `<div>${l}</div>`).join('')}</q-card-section>
 
-    <q-card-actions align="right">${launches}</q-card-actions>
+    <q-card-actions class="q-pa-sm" align="right">${launches}</q-card-actions>
   </q-card>`
 } // getPopupTemplate
 
