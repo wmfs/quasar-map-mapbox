@@ -24,16 +24,24 @@
             size="sm"
             @input="render"
             unelevated
-            toggle-color="accent"
-            toggle-text-color="black"
-            color="white"
-            text-color="black"
             style="border: 1px solid black;"
         />
+
+<!--        toggle-color="accent"-->
+<!--        toggle-text-color="black"-->
+<!--        color="white"-->
+<!--        text-color="black"-->
       </q-card-actions>
     </q-card>
   </div>
 </template>
+
+<style>
+.q-btn-group .bg-primary {
+  background: #E3E2FE !important;
+  color: black !important;
+}
+</style>
 
 <script>
 import mapboxgl from 'mapbox-gl'
