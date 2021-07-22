@@ -1,3 +1,10 @@
+# [1.25.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.24.0...v1.25.0) (2021-07-22)
+
+
+### ✨ Features
+
+* consistent map button styles ([ed71b3f](https://github.com/wmfs/quasar-map-mapbox/commit/ed71b3f979b063cbc06c3f6498b8ba8c7b9a4f8e))
+
 # [1.24.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.23.0...v1.24.0) (2021-07-05)
 
 
