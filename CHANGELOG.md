@@ -1,3 +1,22 @@
+## [1.25.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.25.0...v1.25.1) (2021-10-21)
+
+
+### 🐛 Bug Fixes
+
+* if positions then center on them otherwise center on geolocation or given center [sc-11185] ([600e1a6](https://github.com/wmfs/quasar-map-mapbox/commit/600e1a685658aecf0f850f3831593fe910b445d9))
+
+
+### 🛠 Builds
+
+* **deps-dev:** update dependency codecov to v3.8.3 ([c3e9665](https://github.com/wmfs/quasar-map-mapbox/commit/c3e966543c508722f6402583c9f517dd18944295))
+* **deps-dev:** update dependency mocha to v9 ([0fb3a81](https://github.com/wmfs/quasar-map-mapbox/commit/0fb3a8181837a14bbf2d1e5fafde19950a79517f))
+* **deps-dev:** update semantic-release monorepo ([28801bb](https://github.com/wmfs/quasar-map-mapbox/commit/28801bb6bd32aedad4fd3502fc817a57ad750c05))
+
+
+### ♻️ Chores
+
+* add renovate config [ch6600] ([6af36a9](https://github.com/wmfs/quasar-map-mapbox/commit/6af36a964905367bc169bbb6620104ad3c533fb0))
+
 # [1.25.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.24.0...v1.25.0) (2021-07-22)
 
 
