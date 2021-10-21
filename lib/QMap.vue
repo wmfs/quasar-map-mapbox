@@ -27,10 +27,10 @@
             style="border: 1px solid black;"
         />
 
-<!--        toggle-color="accent"-->
-<!--        toggle-text-color="black"-->
-<!--        color="white"-->
-<!--        text-color="black"-->
+        <!--        toggle-color="accent"-->
+        <!--        toggle-text-color="black"-->
+        <!--        color="white"-->
+        <!--        text-color="black"-->
       </q-card-actions>
     </q-card>
   </div>
@@ -180,20 +180,6 @@ export default {
 } // ...
 
 async function findCentre (qmap, components) {
-  if (qmap.defaultCentreToGeolocation) {
-    try {
-      const position = await getCurrentPosition()
-      const { latitude, longitude } = position.coords
-      return [[longitude, latitude], null]
-    } catch (err) {
-      console.log('error getting geolocation')
-    }
-  }
-
-  if (qmap.centreLongitude && qmap.centreLatitude) {
-    return [[qmap.centreLongitude, qmap.centreLatitude], null]
-  }
-
   const allPositions = components
       .filter(c => c.show)
       .map(c => c.position)
@@ -208,7 +194,21 @@ async function findCentre (qmap, components) {
       allPositions[0],
       bounds(allPositions)
     ]
-  } // have components
+  } else {
+    if (qmap.defaultCentreToGeolocation) {
+      try {
+        const position = await getCurrentPosition()
+        const { latitude, longitude } = position.coords
+        return [[longitude, latitude], null]
+      } catch (err) {
+        console.log('error getting geolocation')
+      }
+    }
+
+    if (qmap.centreLongitude && qmap.centreLatitude) {
+      return [[qmap.centreLongitude, qmap.centreLatitude], null]
+    }
+  }
 
   return [[0, 0], null]
 } // findCentre
