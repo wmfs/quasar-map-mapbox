@@ -22,7 +22,7 @@
             v-model="mode"
             :options="modeOptions"
             size="sm"
-            @input="render"
+            @update:model-value="render"
             unelevated
             style="border: 1px solid black;"
         />
