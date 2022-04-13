@@ -12,8 +12,8 @@
 </template>
 
 <script>
-/* eslint-disable */
-import { h, ref, computed } from 'vue'
+/* eslint-disable vue/no-unused-components */
+import { ref } from 'vue'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { v4 as uuidv4 } from 'uuid'
@@ -215,5 +215,11 @@ function findOf (positions, index, fn) {
       .map(p => p[index])
       .map(p => Number(p))
   return fn(...p)
+}
+
+function getCurrentPosition (options = {}) {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject, options)
+  })
 }
 </script>

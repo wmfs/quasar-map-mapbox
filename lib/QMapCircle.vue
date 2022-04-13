@@ -1,5 +1,4 @@
 <script>
-/* eslint-disable */
 import { throttle } from 'quasar'
 import OsGridRef, { LatLon } from 'geodesy/osgridref.js'
 import { v4 as uuidv4 } from 'uuid'
@@ -84,9 +83,9 @@ export default {
             .setHTML(`<div id="${popupId}" class="q-map-popup"></div>`)
             .addTo(map)
 
-        let template = `<div>`
+        let template = '<div>'
         template += label.map(l => `<div>${l}</div>`).join('')
-        template += `</div>`
+        template += '</div>'
 
         const popupComponent = defineComponent({
           template,
@@ -229,4 +228,3 @@ function paintCircle (colour) {
   }
 }
 </script>
-
