@@ -4,7 +4,7 @@
       <q-card-section class="q-pa-none">
         <div :style="$q.screen.gt.sm ? `padding: 0px; height: 50vh;` : `padding: 0px; height: 300px;`">
           <div :id="containerId" style="top: 0; bottom: 0; height: 100%; width: 100%;"></div>
-          <slot v-if="map"></slot>
+          <slot v-if="mapboxgl && map"></slot>
         </div>
       </q-card-section>
     </q-card>
@@ -32,7 +32,7 @@ export default {
   ],
   provide () {
     return {
-      getMapInstance: () => this.map
+      getMapInstance: () => ({ map: this.map, mapboxgl: this.mapboxgl })
     }
   },
   components: { QMapCircle },
@@ -40,6 +40,7 @@ export default {
     return {
       ready: ref(false),
       map: ref(null),
+      mapboxgl: ref(null),
       containerId: uuidv4(),
       mode: ref('streets'),
       modeOptions: [
@@ -64,13 +65,13 @@ export default {
 
       this.destroyMap()
 
-      mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN
+      this.mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN
 
       const options = this.mapOptions()
 
-      this.navigationControl = new mapboxgl.NavigationControl({ showCompass: false })
+      this.navigationControl = new this.mapboxgl.NavigationControl({ showCompass: false })
 
-      const map = new mapboxgl.Map(options)
+      const map = new this.mapboxgl.Map(options)
       map.addControl(this.navigationControl)
       map.locked = this.locked
       map.on('load', () => {
@@ -121,6 +122,7 @@ export default {
     }
   },
   async mounted () {
+    this.mapboxgl = mapboxgl
     this.ready = true
     this.components = findComponents(this.$slots.default())
     const [center, bounds] = await findCentre(this, this.components)
