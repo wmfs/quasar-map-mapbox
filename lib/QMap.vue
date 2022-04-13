@@ -4,53 +4,24 @@
       <q-card-section class="q-pa-none">
         <div :style="$q.screen.gt.sm ? `padding: 0px; height: 50vh;` : `padding: 0px; height: 300px;`">
           <div :id="containerId" style="top: 0; bottom: 0; height: 100%; width: 100%;"></div>
-          <slot></slot>
+          <slot v-if="map"></slot>
         </div>
       </q-card-section>
-
-      <q-card-actions align="around">
-        <!--<q-toggle-->
-        <!--v-model="locked"-->
-        <!--checked-icon="lock"-->
-        <!--unchecked-icon="lock_open"-->
-        <!--color="primary"-->
-        <!--@input="render"-->
-        <!--class="q-mr-md"-->
-        <!--/>-->
-
-        <q-btn-toggle
-            v-model="mode"
-            :options="modeOptions"
-            size="sm"
-            @update:model-value="render"
-            unelevated
-            style="border: 1px solid black;"
-        />
-
-        <!--        toggle-color="accent"-->
-        <!--        toggle-text-color="black"-->
-        <!--        color="white"-->
-        <!--        text-color="black"-->
-      </q-card-actions>
     </q-card>
   </div>
 </template>
 
-<style>
-.q-btn-group .bg-primary {
-  background: #E3E2FE !important;
-  color: black !important;
-}
-</style>
-
 <script>
+/* eslint-disable */
+import { h, ref, computed } from 'vue'
 import mapboxgl from 'mapbox-gl'
-import QMapCircle from './QMapCircle'
+import 'mapbox-gl/dist/mapbox-gl.css'
 import { v4 as uuidv4 } from 'uuid'
+import QMapCircle from './QMapCircle'
+import findPosition from './find-position'
 
 export default {
-  name: 'Q-Map',
-  components: { QMapCircle },
+  name: 'QMap',
   props: [
     'defaultCentreToGeolocation',
     'centre-longitude',
@@ -59,74 +30,70 @@ export default {
     'draggable',
     'id'
   ],
-  data () {
+  provide () {
     return {
+      getMapInstance: () => this.map
+    }
+  },
+  components: { QMapCircle },
+  setup () {
+    return {
+      ready: ref(false),
+      map: ref(null),
       containerId: uuidv4(),
-      ready: false,
-      map: null,
-      mode: 'streets',
+      mode: ref('streets'),
       modeOptions: [
         { label: 'Streets', value: 'streets' },
         { label: 'Satellite', value: 'satellite' },
         { label: '3D Buildings', value: '3d' }
       ]
     }
-  }, // data
-  async mounted () {
-    this.ensureMapboxCss()
-    this.ensureMapboxJs()
-
-    this.components = findComponents(this)
-
-    this.ready = true
-    await this.render()
-
-    this.$root.$on('MAP_FLY_TO', ({ id, options }) => {
-      if (this.id === id && this.map) {
-        this.map.flyTo(options)
-      }
-    })
-  }, // mounted
-  beforeDestroy () {
-    this.destroyMap()
-  }, // beforeDestroy
+  },
+  data () {
+    return {
+      components: [],
+      center: [0, 0],
+      bounds: null
+    }
+  },
   methods: {
-    ensureMapboxCss () {
-      const exists = document.getElementById('MAPBOX_CSS_SCRIPT')
-
-      if (!exists) {
-        const mapboxglCss = document.createElement('link')
-        mapboxglCss.type = 'text/css'
-        mapboxglCss.rel = 'stylesheet'
-        mapboxglCss.href = `https://api.mapbox.com/mapbox-gl-js/v${mapboxgl.version}/mapbox-gl.css`
-
-        document.head.appendChild(mapboxglCss)
+    render () {
+      if (!this.ready) {
+        return
       }
-    },
-    ensureMapboxJs () {
-      const exists = document.getElementById('MAPBOX_JS_SCRIPT')
 
-      if (!exists) {
-        const mapboxglJs = document.createElement('script')
-        mapboxglJs.id = 'MAPBOX_JS_SCRIPT'
-        mapboxglJs.src = `https://api.mapbox.com/mapbox-gl-js/v${mapboxgl.version}/mapbox-gl.js`
+      this.destroyMap()
 
-        document.head.appendChild(mapboxglJs)
-      }
-    },
-    onLoad () {
-      this.map.locked = this.locked
-      this.components.forEach(s => {
-        s.onLoad && s.onLoad(this.map)
+      mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN
+
+      const options = this.mapOptions()
+
+      this.navigationControl = new mapboxgl.NavigationControl({ showCompass: false })
+
+      const map = new mapboxgl.Map(options)
+      map.addControl(this.navigationControl)
+      map.locked = this.locked
+      map.on('load', () => {
+        this.map = map
       })
-    }, // onLoad
-    async mapOptions () {
-      const [centre, bounds] = await findCentre(this, this.components)
+    },
+    destroyMap () {
+      if (!this.map) {
+        return
+      }
 
+      if (this.navigationControl) {
+        this.map.removeControl(this.navigationControl)
+      }
+
+      this.map.remove()
+      this.map = null
+    },
+    mapOptions () {
       const options = {
         container: this.containerId,
-        center: centre,
-        bounds: bounds,
+        center: this.center,
+        bounds: this.bounds,
         fitBoundsOptions: { padding: 20 },
         interactive: !this.locked ? true : this.draggable,
         zoom: 16
@@ -151,48 +118,61 @@ export default {
       }
 
       return options
-    }, // mapOptions
-    destroyMap () {
-      if (!this.map) return
-
-      if (this.navigationControl) this.map.removeControl(this.navigationControl)
-      this.map.remove()
-      this.map = null
-
-      this.$root.$off('MAP_FLY_TO')
-    }, // destroyMap
-    async render () {
-      if (this.ready) {
-        this.destroyMap()
-
-        mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN
-
-        const options = await this.mapOptions()
-        this.map = new mapboxgl.Map(options)
-
-        this.navigationControl = new mapboxgl.NavigationControl({ showCompass: false })
-        this.map.addControl(this.navigationControl)
-
-        this.map.on('load', () => this.onLoad())
-      }
     }
-  } // methods
-} // ...
+  },
+  async mounted () {
+    this.ready = true
+    this.components = findComponents(this.$slots.default())
+    const [center, bounds] = await findCentre(this, this.components)
+    this.center = center
+    this.bounds = bounds
+    this.render()
+  },
+  beforeUnmount () {
+    this.destroyMap()
+  }
+}
 
-async function findCentre (qmap, components) {
-  const allPositions = components
-      .filter(c => c.show)
-      .map(c => c.position)
-      .filter(p => p)
+function findComponents (defaultSlots) {
+  const components = []
 
-  if (allPositions.length) {
-    if (allPositions.length === 1) {
-      return [allPositions[0], null]
+  findComponentsIter(defaultSlots, components)
+
+  return components
+}
+
+function findComponentsIter (vnodes, components) {
+  for (const vnode of vnodes) {
+    if (typeof vnode.type !== 'object') {
+      if (Array.isArray(vnode.children)) {
+        findComponentsIter(vnode.children, components)
+      }
+
+      continue
+    }
+
+    if (vnode.type.name !== 'QMapCircle') {
+      continue
+    }
+
+    if (vnode.props.showMarker !== true) {
+      continue
+    }
+
+    const position = findPosition(vnode.props)
+    components.push(position)
+  }
+}
+
+async function findCentre (qmap, positions) {
+  if (positions.length) {
+    if (positions.length === 1) {
+      return [positions[0], null]
     }
 
     return [
-      allPositions[0],
-      bounds(allPositions)
+      positions[0],
+      bounds(positions)
     ]
   } else {
     if (qmap.defaultCentreToGeolocation) {
@@ -211,42 +191,27 @@ async function findCentre (qmap, components) {
   }
 
   return [[0, 0], null]
-} // findCentre
+}
 
-function findComponents (qmap) {
-  if (!qmap.$slots || !qmap.$slots.default) return []
-
-  return qmap.$slots.default
-      .map(c => c.componentInstance)
-      .filter(c => c)
-} // findComponents
-
-function bounds (allPositions) {
+function bounds (positions) {
   return [
-    minOf(allPositions, 0), minOf(allPositions, 1),
-    maxOf(allPositions, 0), maxOf(allPositions, 1)
+    minOf(positions, 0), minOf(positions, 1),
+    maxOf(positions, 0), maxOf(positions, 1)
   ]
-} // bounds
+}
 
-function minOf (allPositions, index) {
-  return findOf(allPositions, index, Math.min)
-} // minOf
+function minOf (positions, index) {
+  return findOf(positions, index, Math.min)
+}
 
-function maxOf (allPositions, index) {
-  return findOf(allPositions, index, Math.max)
-} // maxOf
+function maxOf (positions, index) {
+  return findOf(positions, index, Math.max)
+}
 
-function findOf (allPositions, index, fn) {
-  const p = allPositions
+function findOf (positions, index, fn) {
+  const p = positions
       .map(p => p[index])
       .map(p => Number(p))
   return fn(...p)
-} // findOf
-
-function getCurrentPosition (options = {}) {
-  return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(resolve, reject, options)
-  })
 }
 </script>
-
