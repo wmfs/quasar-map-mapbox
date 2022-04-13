@@ -4,6 +4,7 @@ import { throttle } from 'quasar'
 import OsGridRef, { LatLon } from 'geodesy/osgridref.js'
 import { v4 as uuidv4 } from 'uuid'
 import findPosition from './find-position'
+import { defineComponent, createApp } from 'vue'
 
 const locationColour = '#443DF6'
 // const prevLocationColour = '#6666D8'
@@ -36,7 +37,7 @@ export default {
     }
   },
   methods: {
-    onLoad (map) {
+    onLoad (mapboxgl, map) {
       setMarker(
           map,
           this.markerId,
@@ -45,46 +46,40 @@ export default {
           this.showMarker
       )
 
-      // const popup = new mapboxgl.Popup({ closeButton: true, closeOnMove: true })
-      // const canvas = map.getCanvasContainer()
-      //
-      // popup.on('close', () => {
-      //   this.showingPopup = false
-      // })
-      //
-      // const addPopup = (e) => {
-      //   if (this.showingPopup) return
-      //
-      //   const popupId = `${this.markerId}-popup`
-      //   const label = Array.isArray(this.label) ? this.label : [this.label]
-      //
-      //   popup
-      //     .setLngLat(this.position)
-      //     .setHTML(`<div id="${popupId}" class="q-map-popup"></div>`)
-      //     .addTo(map)
-      //
-      //   let template = `<div>`
-      //   template += label.map(l => `<div>${l}</div>`).join('')
-      //   template += `</div>`
-      //
-      //   // const Popup = Vue.extend({
-      //   //   template,
-      //   //   props: ['data', 'm']
-      //   // })
-      //   //
-      //   // this.$nextTick(() => {
-      //   //   const p = new Popup({
-      //   //     propsData: {
-      //   //       data: this.data,
-      //   //       m: this.m
-      //   //     }
-      //   //   }).$mount()
-      //   //   document.getElementById(popupId).appendChild(p.$el)
-      //   // })
-      //
-      //   this.showingPopup = true
-      // }
-      //
+      const popup = new mapboxgl.Popup({ closeButton: true, closeOnMove: true })
+      const canvas = map.getCanvasContainer()
+
+      popup.on('close', () => {
+        this.showingPopup = false
+      })
+
+      const addPopup = (e) => {
+        if (this.showingPopup) {
+          return
+        }
+
+        const popupId = `${this.markerId}-popup`
+        const label = Array.isArray(this.label) ? this.label : [this.label]
+
+        popup
+            .setLngLat(this.position)
+            .setHTML(`<div id="${popupId}" class="q-map-popup"></div>`)
+            .addTo(map)
+
+        let template = `<div>`
+        template += label.map(l => `<div>${l}</div>`).join('')
+        template += `</div>`
+
+        const popupComponent = defineComponent({
+          template,
+          props: ['data', 'm']
+        })
+
+        createApp(popupComponent).mount(document.getElementById(popupId))
+
+        this.showingPopup = true
+      }
+
       // if (!this.locked && !map.locked) {
       //   map.on('mouseenter', this.markerId, () => {
       //     canvas.style.cursor = 'grab'
@@ -102,19 +97,21 @@ export default {
       //     if (this.label) canvas.style.cursor = 'pointer'
       //   })
       // }
-      //
-      // map.on('click', this.markerId, (e) => {
-      //   if (this.label) addPopup(e)
-      // })
-      //
+
+      map.on('click', this.markerId, (e) => {
+        if (this.label) {
+          addPopup(e)
+        }
+      })
+
       // map.on('mouseleave', this.markerId, () => {
       //   canvas.style.cursor = ''
       // })
     }
   },
   mounted () {
-    const map = this.getMapInstance()
-    this.onLoad(map)
+    const { map, mapboxgl } = this.getMapInstance()
+    this.onLoad(mapboxgl, map)
   },
   render() {
     return null
@@ -125,8 +122,6 @@ function setMarker (map, id, centre, colour, showMarker) {
   if (!map) {
     return
   }
-
-  console.log('setMarker', id, centre, colour, showMarker)
 
   if (map.getLayer(id)) {
     map.removeLayer(id)
@@ -175,4 +170,3 @@ function paintCircle (colour) {
   }
 }
 </script>
-
