@@ -50,7 +50,8 @@ export default {
       this.updateXY()
     },
     showMarker () {
-      this.map.setLayoutProperty(this.markerId, 'visibility', this.showMarker ? 'visible' : 'none')
+      const { map } = this.getMapInstance()
+      map.setLayoutProperty(this.markerId, 'visibility', this.showMarker ? 'visible' : 'none')
     }
   },
   methods: {
