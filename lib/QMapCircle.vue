@@ -36,6 +36,23 @@ export default {
       marker: null
     }
   },
+  watch: {
+    longitude () {
+      this.updateLatLon()
+    },
+    latitude () {
+      this.updateLatLon()
+    },
+    x () {
+      this.updateXY()
+    },
+    y () {
+      this.updateXY()
+    },
+    showMarker () {
+      this.map.setLayoutProperty(this.markerId, 'visibility', this.showMarker ? 'visible' : 'none')
+    }
+  },
   methods: {
     onLoad (mapboxgl, map) {
       setMarker(
@@ -80,23 +97,23 @@ export default {
         this.showingPopup = true
       }
 
-      // if (!this.locked && !map.locked) {
-      //   map.on('mouseenter', this.markerId, () => {
-      //     canvas.style.cursor = 'grab'
-      //   })
-      //   map.on('mousedown', this.markerId, e => {
-      //     e.preventDefault()
-      //     canvas.style.cursor = 'grabbing'
-      //     popup.remove()
-      //     const onMove = e => this.onMove(e, map)
-      //     map.on('mousemove', onMove)
-      //     map.once('mouseup', e => this.onUp(e, map, onMove))
-      //   })
-      // } else {
-      //   map.on('mouseenter', this.markerId, () => {
-      //     if (this.label) canvas.style.cursor = 'pointer'
-      //   })
-      // }
+      if (!this.locked && !map.locked) {
+        map.on('mouseenter', this.markerId, () => {
+          canvas.style.cursor = 'grab'
+        })
+        map.on('mousedown', this.markerId, e => {
+          e.preventDefault()
+          canvas.style.cursor = 'grabbing'
+          popup.remove()
+          const onMove = e => this.onMove(e, map)
+          map.on('mousemove', onMove)
+          map.once('mouseup', e => this.onUp(e, map, onMove))
+        })
+      } else {
+        map.on('mouseenter', this.markerId, () => {
+          if (this.label) canvas.style.cursor = 'pointer'
+        })
+      }
 
       map.on('click', this.markerId, (e) => {
         if (this.label) {
@@ -104,16 +121,57 @@ export default {
         }
       })
 
-      // map.on('mouseleave', this.markerId, () => {
-      //   canvas.style.cursor = ''
-      // })
+      map.on('mouseleave', this.markerId, () => {
+        canvas.style.cursor = ''
+      })
+    },
+    onMove (e, map) {
+      map.getCanvasContainer().style.cursor = 'grabbing'
+      const { lat, lng } = e.lngLat
+      throttle(() => {
+        if (this.format === 'OSGridRef') {
+          const grid = new LatLon(lat, lng).toOsGrid()
+          this.$emit('x', grid.easting)
+          this.$emit('y', grid.northing)
+        } else {
+          this.$emit('longitude', lng)
+          this.$emit('latitude', lat)
+        }
+      }, 600)()
+      map.getSource(this.markerId).setData(makeSource([lng, lat]).data)
+    },
+    onUp (e, map, onMove) {
+      map.getCanvasContainer().style.cursor = ''
+      map.off('mousemove', onMove)
+    },
+    updateXY () {
+      const gridref = new OsGridRef(this.x, this.y)
+      const pWgs84 = gridref.toLatLon()
+      this.position = [pWgs84._lon, pWgs84._lat]
+      setMarker(
+          this.map,
+          this.markerId,
+          this.position,
+          this.markerColour,
+          this.showMarker
+      )
+    },
+    updateLatLon () {
+      this.position = [this.longitude, this.latitude]
+      setMarker(
+          this.map,
+          this.markerId,
+          this.position,
+          this.markerColour,
+          this.showMarker
+      )
     }
   },
   mounted () {
     const { map, mapboxgl } = this.getMapInstance()
     this.onLoad(mapboxgl, map)
   },
-  render() {
+  render () {
     return null
   }
 }
@@ -170,3 +228,4 @@ function paintCircle (colour) {
   }
 }
 </script>
+
