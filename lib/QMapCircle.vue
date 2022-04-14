@@ -189,7 +189,7 @@ function setMarker (map, id, centre, colour, showMarker) {
   map.addSource(id, makeSource(centre))
 
   const markerLayer = {
-    id: id,
+    id,
     type: 'circle',
     source: id,
     paint: paintCircle(colour),
