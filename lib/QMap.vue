@@ -1,14 +1,23 @@
 <template>
-  <div>
-    <q-card class="q-mb-md" flat>
-      <q-card-section class="q-pa-none">
-        <div :style="$q.screen.gt.sm ? `padding: 0px; height: 50vh;` : `padding: 0px; height: 300px;`">
-          <div :id="containerId" style="top: 0; bottom: 0; height: 100%; width: 100%;"></div>
-          <slot v-if="mapboxgl && map"></slot>
-        </div>
-      </q-card-section>
-    </q-card>
-  </div>
+  <q-card class="q-mb-md" flat>
+    <q-card-section class="q-pa-none">
+      <div :style="$q.screen.gt.sm ? `padding: 0px; height: 50vh;` : `padding: 0px; height: 300px;`">
+        <div :id="containerId" style="top: 0; bottom: 0; height: 100%; width: 100%;"></div>
+        <slot v-if="mapboxgl && map"></slot>
+      </div>
+    </q-card-section>
+
+    <q-card-actions align="around">
+      <q-btn-toggle
+          v-model="mode"
+          :options="modeOptions"
+          size="sm"
+          @update:model-value="render"
+          unelevated
+          style="border: 1px solid black;"
+      />
+    </q-card-actions>
+  </q-card>
 </template>
 
 <script>
@@ -55,6 +64,21 @@ export default {
       components: [],
       center: [0, 0],
       bounds: null
+    }
+  },
+  watch: {
+    mapFlyTo: {
+      handler ({ lat, lng }) {
+        if (this.map) {
+          this.map.flyTo({ center: [lng, lat], zoom: 15 })
+        }
+      },
+      deep: true
+    }
+  },
+  computed: {
+    mapFlyTo () {
+      return this.$store.state.app.mapFlyTo[this.id]
     }
   },
   methods: {
