@@ -37,7 +37,8 @@ export default {
     'centre-latitude',
     'locked',
     'draggable',
-    'id'
+    'id',
+    'mapFlyTo'
   ],
   provide () {
     return {
@@ -68,17 +69,22 @@ export default {
   },
   watch: {
     mapFlyTo: {
-      handler ({ lat, lng }) {
-        if (this.map) {
-          this.map.flyTo({ center: [lng, lat], zoom: 15 })
+      handler (center) {
+        if (!this.map) {
+          return
         }
+
+        if (!Array.isArray(center)) {
+          return
+        }
+
+        if (center.length !== 2) {
+          return
+        }
+
+        this.map.flyTo({ center, zoom: 15 })
       },
       deep: true
-    }
-  },
-  computed: {
-    mapFlyTo () {
-      return this.$store.state.app.mapFlyTo[this.id]
     }
   },
   methods: {
