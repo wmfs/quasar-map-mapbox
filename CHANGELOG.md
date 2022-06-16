@@ -1,3 +1,27 @@
+# [1.26.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.25.1...v1.26.0) (2022-06-16)
+
+
+### 🐛 Bug Fixes
+
+* add the update position functions ([8046a4c](https://github.com/wmfs/quasar-map-mapbox/commit/8046a4c0929129c7c10a88e8cb815d5f484cd75c))
+* linting etc ([6a9c2b7](https://github.com/wmfs/quasar-map-mapbox/commit/6a9c2b7786c3a50aa6a72141ed66efc376929df2))
+* map fly to to use props not store ([5752f9a](https://github.com/wmfs/quasar-map-mapbox/commit/5752f9af03f35f1608807f0042a3af1be231804c))
+* model-value, [@update](https://github.com/update):model-value [sc-14460] ([32821fd](https://github.com/wmfs/quasar-map-mapbox/commit/32821fd29fc8da9904782d33f2554670ae2d85ed))
+* re-introduce fly to events ([1f871be](https://github.com/wmfs/quasar-map-mapbox/commit/1f871befa05038a12d0a60d99988254d29dd43a4))
+* show marker watcher ([93c2221](https://github.com/wmfs/quasar-map-mapbox/commit/93c22211ec2b5476487778649660b741f3c6c486))
+
+
+### 🛠 Builds
+
+* **deps:** update dependencies ([5a28c16](https://github.com/wmfs/quasar-map-mapbox/commit/5a28c16c82b4e7b4bc1cf9af8ec699a10f0ee7ab))
+* **deps:** update deps, except mapbox-gl ([213602e](https://github.com/wmfs/quasar-map-mapbox/commit/213602e23772fad76063805602ac90a8329cdd0d))
+
+
+### 📦 Code Refactoring
+
+* progress using Vue 3, display map, markers and apply center and bounds ([62892cf](https://github.com/wmfs/quasar-map-mapbox/commit/62892cfb96aa23ee46b2fe2e45dd030577da791c))
+* rendering marker popups ([a00f934](https://github.com/wmfs/quasar-map-mapbox/commit/a00f9341f55144f2a0c045578a6b8f6c9502bcda))
+
 ## [1.25.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.25.0...v1.25.1) (2021-10-21)
 
 
