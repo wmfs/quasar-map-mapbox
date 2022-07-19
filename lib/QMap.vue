@@ -9,12 +9,17 @@
 
     <q-card-actions align="around">
       <q-btn-toggle
+          class="button-toggle"
           v-model="mode"
           :options="modeOptions"
           size="sm"
           @update:model-value="render"
           unelevated
-          style="border: 1px solid black;"
+          toggle-color="white"
+          toggle-text-color="primary"
+          color="lighter"
+          text-color="faded"
+          no-caps
       />
     </q-card-actions>
   </q-card>
