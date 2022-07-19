@@ -1,3 +1,10 @@
+## [1.26.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.26.0...v1.26.1) (2022-07-19)
+
+
+### 🐛 Bug Fixes
+
+* adjust button toggle styles ([30c28f1](https://github.com/wmfs/quasar-map-mapbox/commit/30c28f14a4c7c3bde1d23bc4ca18559215448545))
+
 # [1.26.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.25.1...v1.26.0) (2022-06-16)
 
 
