@@ -1,5 +1,5 @@
 <template>
-  <q-card class="q-mb-md" flat>
+  <q-card class="q-mb-md">
     <q-card-section class="q-pa-none">
       <div :style="$q.screen.gt.sm ? `padding: 0px; height: 50vh;` : `padding: 0px; height: 300px;`">
         <div :id="containerId" style="top: 0; bottom: 0; height: 100%; width: 100%;"></div>
