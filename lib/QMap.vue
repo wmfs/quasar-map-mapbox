@@ -1,8 +1,8 @@
 <template>
-  <q-card class="q-mb-md">
+  <q-card class="q-mb-md" flat>
     <q-card-section class="q-pa-none">
       <div :style="$q.screen.gt.sm ? `padding: 0px; height: 50vh;` : `padding: 0px; height: 300px;`">
-        <div :id="containerId" style="top: 0; bottom: 0; height: 100%; width: 100%;"></div>
+        <div :id="containerId" style="top: 0; bottom: 0; height: 100%; width: 100%; border: 1px solid grey; border-radius: 4px 4px 0px 0px;"></div>
         <slot v-if="mapboxgl && map"></slot>
       </div>
     </q-card-section>
