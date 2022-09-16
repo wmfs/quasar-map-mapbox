@@ -2,7 +2,7 @@
   <q-card class="q-mb-md bg-transparent" flat>
     <q-card-section class="q-pa-none">
       <div :style="$q.screen.gt.sm ? `padding: 0px; height: 50vh;` : `padding: 0px; height: 300px;`">
-        <div :id="containerId" style="top: 0; bottom: 0; height: 100%; width: 100%; border-radius: 4px;"></div>
+        <div :id="containerId" style="top: 0; bottom: 0; height: 100%; width: 100%; border-radius: 4px; box-shadow: 0px 0px 5px #BDBDBD;"></div>
         <slot v-if="mapboxgl && map"></slot>
       </div>
     </q-card-section>
