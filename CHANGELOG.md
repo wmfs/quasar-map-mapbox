@@ -1,3 +1,19 @@
+# [1.27.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.26.1...v1.27.0) (2022-09-28)
+
+
+### ✨ Features
+
+* Add border around map so grey on map is separated from background [sc-16615] ([1278008](https://github.com/wmfs/quasar-map-mapbox/commit/1278008ec46eac283a23299147fdf59c7684cea0))
+* Add shadow for "Map" components [sc-16615] ([192a56e](https://github.com/wmfs/quasar-map-mapbox/commit/192a56e48c67a0cbf27f5c9ace85e9efc5b5ebb6))
+* add shadow to map ([f9d3a7f](https://github.com/wmfs/quasar-map-mapbox/commit/f9d3a7fc2da3dd419698b91b7d51efd59a49f147))
+* adjust shadow on map ([ff0849f](https://github.com/wmfs/quasar-map-mapbox/commit/ff0849f1659ecb8f7b14be8fbd94e21012497833))
+* improve map style ([24a4567](https://github.com/wmfs/quasar-map-mapbox/commit/24a45679fc03d237d7cac648b320048739c9eb48))
+
+
+### 🐛 Bug Fixes
+
+* remove map border ([df1324b](https://github.com/wmfs/quasar-map-mapbox/commit/df1324bde126c56c846027ef967e6bcd5e12b65c))
+
 ## [1.26.1](https://github.com/wmfs/quasar-map-mapbox/compare/v1.26.0...v1.26.1) (2022-07-19)
 
 
