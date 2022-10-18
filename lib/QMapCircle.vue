@@ -10,25 +10,55 @@ const locationColour = '#443DF6'
 
 export default {
   name: 'QMapCircle',
-  props: [
-    'data',
-    'm',
-    'format',
-    'x',
-    'y',
-    'longitude',
-    'latitude',
-    'color',
-    'id',
-    'showMarker',
-    'label',
-    'locked'
-  ],
+  props: {
+    data: {
+      type: Object
+    },
+    m: {
+      type: Object
+    },
+    format: {
+      type: String,
+      default: 'LatLon',
+      validator (value) {
+        return ['LatLon', 'OSGridRef'].includes(value)
+      }
+    },
+    x: {
+      type: [String, Number]
+    },
+    y: {
+      type: [String, Number]
+    },
+    latitude: {
+      type: [String, Number]
+    },
+    longitude: {
+      type: [String, Number]
+    },
+    color: {
+      type: String,
+      default: locationColour
+    },
+    id: {
+      type: String,
+      default () {
+        return uuidv4()
+      }
+    },
+    showMarker: {
+      type: Boolean
+    },
+    label: {
+      type: [String, Array]
+    },
+    locked: {
+      type: Boolean
+    }
+  },
   inject: ['getMapInstance'],
   data () {
     return {
-      markerId: this.id || uuidv4(), // `${this._uid}`,
-      markerColour: this.color || locationColour,
       position: findPosition(this),
       show: this.showMarker,
       showingPopup: false,
@@ -50,16 +80,16 @@ export default {
     },
     showMarker () {
       const { map } = this.getMapInstance()
-      map.setLayoutProperty(this.markerId, 'visibility', this.showMarker ? 'visible' : 'none')
+      map.setLayoutProperty(this.id, 'visibility', this.showMarker ? 'visible' : 'none')
     }
   },
   methods: {
     onLoad (mapboxgl, map) {
       setMarker(
           map,
-          this.markerId,
+          this.id,
           this.position,
-          this.markerColour,
+          this.color,
           this.showMarker
       )
 
@@ -75,7 +105,7 @@ export default {
           return
         }
 
-        const popupId = `${this.markerId}-popup`
+        const popupId = `${this.id}-popup`
         const label = Array.isArray(this.label) ? this.label : [this.label]
 
         popup
@@ -98,10 +128,10 @@ export default {
       }
 
       if (!this.locked && !map.locked) {
-        map.on('mouseenter', this.markerId, () => {
+        map.on('mouseenter', this.id, () => {
           canvas.style.cursor = 'grab'
         })
-        map.on('mousedown', this.markerId, e => {
+        map.on('mousedown', this.id, e => {
           e.preventDefault()
           canvas.style.cursor = 'grabbing'
           popup.remove()
@@ -110,18 +140,18 @@ export default {
           map.once('mouseup', e => this.onUp(e, map, onMove))
         })
       } else {
-        map.on('mouseenter', this.markerId, () => {
+        map.on('mouseenter', this.id, () => {
           if (this.label) canvas.style.cursor = 'pointer'
         })
       }
 
-      map.on('click', this.markerId, (e) => {
+      map.on('click', this.id, (e) => {
         if (this.label) {
           addPopup(e)
         }
       })
 
-      map.on('mouseleave', this.markerId, () => {
+      map.on('mouseleave', this.id, () => {
         canvas.style.cursor = ''
       })
     },
@@ -138,7 +168,7 @@ export default {
           this.$emit('latitude', lat)
         }
       }, 600)()
-      map.getSource(this.markerId).setData(makeSource([lng, lat]).data)
+      map.getSource(this.id).setData(makeSource([lng, lat]).data)
     },
     onUp (e, map, onMove) {
       map.getCanvasContainer().style.cursor = ''
@@ -150,9 +180,9 @@ export default {
       this.position = [pWgs84._lon, pWgs84._lat]
       setMarker(
           this.map,
-          this.markerId,
+          this.id,
           this.position,
-          this.markerColour,
+          this.color,
           this.showMarker
       )
     },
@@ -160,9 +190,9 @@ export default {
       this.position = [this.longitude, this.latitude]
       setMarker(
           this.map,
-          this.markerId,
+          this.id,
           this.position,
-          this.markerColour,
+          this.color,
           this.showMarker
       )
     }

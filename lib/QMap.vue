@@ -159,10 +159,14 @@ export default {
   async mounted () {
     this.mapboxgl = mapboxgl
     this.ready = true
-    this.components = findComponents(this.$slots.default())
-    const [center, bounds] = await findCentre(this, this.components)
-    this.center = center
-    this.bounds = bounds
+
+    if (this.$slots.default) {
+      this.components = findComponents(this.$slots.default())
+      const [center, bounds] = await findCentre(this, this.components)
+      this.center = center
+      this.bounds = bounds
+    }
+
     this.render()
   },
   beforeUnmount () {
@@ -196,21 +200,19 @@ function findComponentsIter (vnodes, components) {
       continue
     }
 
-    const position = findPosition(vnode.props)
-    components.push(position)
+    components.push(vnode.props)
   }
 }
 
-async function findCentre (qmap, positions) {
-  if (positions.length) {
-    if (positions.length === 1) {
-      return [positions[0], null]
+async function findCentre (qmap, components) {
+  if (components.length) {
+    const position = findPosition(components[0])
+
+    if (components.length === 1) {
+      return [position, null]
     }
 
-    return [
-      positions[0],
-      bounds(positions)
-    ]
+    return [position, bounds(components)]
   } else {
     if (qmap.defaultCentreToGeolocation) {
       try {
@@ -230,23 +232,24 @@ async function findCentre (qmap, positions) {
   return [[0, 0], null]
 }
 
-function bounds (positions) {
+function bounds (components) {
   return [
-    minOf(positions, 0), minOf(positions, 1),
-    maxOf(positions, 0), maxOf(positions, 1)
+    minOf(components, 0), minOf(components, 1),
+    maxOf(components, 0), maxOf(components, 1)
   ]
 }
 
-function minOf (positions, index) {
-  return findOf(positions, index, Math.min)
+function minOf (components, index) {
+  return findOf(components, index, Math.min)
 }
 
-function maxOf (positions, index) {
-  return findOf(positions, index, Math.max)
+function maxOf (components, index) {
+  return findOf(components, index, Math.max)
 }
 
-function findOf (positions, index, fn) {
-  const p = positions
+function findOf (components, index, fn) {
+  const p = components
+      .map(findPosition)
       .map(p => p[index])
       .map(p => Number(p))
   return fn(...p)
