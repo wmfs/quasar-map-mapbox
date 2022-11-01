@@ -1,3 +1,11 @@
+# [1.28.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.27.0...v1.28.0) (2022-11-01)
+
+
+### 🛠 Builds
+
+* **deps-dev:** update dependency standard to v17 ([0787dca](https://github.com/wmfs/quasar-map-mapbox/commit/0787dca219866fa0c8c1ea33075b0b019805fab0))
+* **deps:** update dependency uuid to v9 ([5dad59d](https://github.com/wmfs/quasar-map-mapbox/commit/5dad59da522af89f38d666c8459b9173cac6273d))
+
 # [1.27.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.26.1...v1.27.0) (2022-09-28)
 
 
