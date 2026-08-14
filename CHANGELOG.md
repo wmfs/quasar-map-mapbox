@@ -1,3 +1,17 @@
+## [1.29.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.28.0...v1.29.0) (2026-08-14)
+
+### Bug Fix(es) :bug:
+
+* bump semantic-release ([002104e](https://github.com/wmfs/quasar-map-mapbox/commit/002104e33bd98e2c884775279ca65e8cf32fc705))
+* update .circleci/config.yml to 2.1 ([34296aa](https://github.com/wmfs/quasar-map-mapbox/commit/34296aacfc2af06f0bf763e77bac073e6c9b13a8))
+
+### Build system dependencies :hammer:
+
+* **deps-dev:** [sc-29160] Resolve issue with semantic-release changelog notes ([#162](https://github.com/wmfs/quasar-map-mapbox/issues/162)) ([ecf2bb7](https://github.com/wmfs/quasar-map-mapbox/commit/ecf2bb79d2a08fc44e59bae384ed0b94edbf7fe8))
+* **deps-dev:** update dependency @semantic-release/release-notes-generator to v14.1.0 ([acb249a](https://github.com/wmfs/quasar-map-mapbox/commit/acb249a32f39d8762db4215325c12f8e97797f40))
+* **deps:** update dependency uuid to v10 ([#157](https://github.com/wmfs/quasar-map-mapbox/issues/157)) ([8385c67](https://github.com/wmfs/quasar-map-mapbox/commit/8385c675e00c0a5aa9d401e0d6750dfbcf0dba21))
+* update generate notes preset from metahub to angular ([5b5d196](https://github.com/wmfs/quasar-map-mapbox/commit/5b5d196f7c4d5b1d0a158880920c0748166948ee))
+
 # [1.28.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.27.0...v1.28.0) (2022-11-01)
 
 
