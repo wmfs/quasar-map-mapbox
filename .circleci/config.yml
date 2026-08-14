@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -20,7 +20,6 @@ jobs:
           name: release
           command: npx semantic-release
 workflows:
-  version: 2
   release:
     jobs:
       - build:
