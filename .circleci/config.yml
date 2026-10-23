@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  gh-app: wmfs/github-app-token@dev:pilot
 jobs:
   build:
     docker:
@@ -16,6 +18,7 @@ jobs:
           command: |
             npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
             npm install
+      - gh-app/mint
       - run:
           name: release
           command: npx semantic-release
@@ -26,6 +29,7 @@ workflows:
           context:
             - docker-hub-creds
             - build-env-vars
+            - github-app
           filters:
             branches:
               only: master
