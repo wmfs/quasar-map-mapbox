@@ -1,3 +1,9 @@
+## [1.31.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.30.0...v1.31.0) (2026-10-26)
+
+### Build system dependencies :hammer:
+
+* **deps:** update dependency uuid to v11 [security] ([#173](https://github.com/wmfs/quasar-map-mapbox/issues/173)) ([519be7f](https://github.com/wmfs/quasar-map-mapbox/commit/519be7fc21aeed26f3e101967b6fbf910db33bf2))
+
 ## [1.30.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.29.0...v1.30.0) (2026-10-26)
 
 ### Build system dependencies :hammer:
