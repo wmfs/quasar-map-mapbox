@@ -1,3 +1,15 @@
+## [1.30.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.29.0...v1.30.0) (2026-10-26)
+
+### Build system dependencies :hammer:
+
+* **deps:** update dependency lodash.template to v4.18.0 [security] ([#169](https://github.com/wmfs/quasar-map-mapbox/issues/169)) ([ab91db5](https://github.com/wmfs/quasar-map-mapbox/commit/ab91db5b9eec31f15be5a02cfff7a855b595235e))
+
+### CICD Configuration Changes :construction_worker:
+
+* pin github-app-token orb to 1.0.0 ([9b96d15](https://github.com/wmfs/quasar-map-mapbox/commit/9b96d15760137c921435edbd2258689ab1867657))
+* use github-app-token orb for release token ([5d8f0fb](https://github.com/wmfs/quasar-map-mapbox/commit/5d8f0fb56f92abe4f5766db540767fc7eea4e868))
+* use shared renovate preset [sc-34117] ([#178](https://github.com/wmfs/quasar-map-mapbox/issues/178)) ([75142ff](https://github.com/wmfs/quasar-map-mapbox/commit/75142ff3b130013c0b00e68c27c9ec0ed471cd01))
+
 ## [1.29.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.28.0...v1.29.0) (2026-08-14)
 
 ### Bug Fix(es) :bug:
