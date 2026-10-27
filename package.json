@@ -19,8 +19,8 @@
     "vue": "^3.2.33"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "6.0.3",
-    "@semantic-release/git": "10.0.1",
+    "@semantic-release/changelog": "7.0.0",
+    "@semantic-release/git": "11.0.1",
     "@semantic-release/release-notes-generator": "14.1.0",
     "chai": "4.3.6",
     "codecov": "3.8.3",
@@ -28,7 +28,7 @@
     "cz-conventional-changelog": "3.3.0",
     "mocha": "9.2.2",
     "nyc": "15.1.0",
-    "semantic-release": "24.2.9",
+    "semantic-release": "25.0.9",
     "standard": "17.0.0"
   },
   "scripts": {
