@@ -27,7 +27,7 @@
     "conventional-changelog-conventionalcommits": "8.0.0",
     "cz-conventional-changelog": "3.3.0",
     "mocha": "12.0.3",
-    "nyc": "15.1.0",
+    "nyc": "18.0.0",
     "semantic-release": "25.0.9",
     "standard": "17.0.0"
   },
