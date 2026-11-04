@@ -1,3 +1,12 @@
+## [1.32.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.31.0...v1.32.0) (2026-11-04)
+
+### Build system dependencies :hammer:
+
+* **deps-dev:** update dependency mocha to v12 ([#176](https://github.com/wmfs/quasar-map-mapbox/issues/176)) ([35f93e3](https://github.com/wmfs/quasar-map-mapbox/commit/35f93e38be5bae0f81d0edb58dfe1ec04662ab99))
+* **deps-dev:** update dependency nyc to v18 ([#168](https://github.com/wmfs/quasar-map-mapbox/issues/168)) ([c94307e](https://github.com/wmfs/quasar-map-mapbox/commit/c94307e5591fd3211abc12a6a03ef46cb4591a08))
+* **deps-dev:** update semantic-release monorepo ([#177](https://github.com/wmfs/quasar-map-mapbox/issues/177)) ([db8b7f3](https://github.com/wmfs/quasar-map-mapbox/commit/db8b7f3e7c858375671a7c2c70023a464fea7804))
+* **deps:** update dependency uuid to v14 ([#182](https://github.com/wmfs/quasar-map-mapbox/issues/182)) ([4936218](https://github.com/wmfs/quasar-map-mapbox/commit/4936218c3a34b5e301282aa09a1c68697ae6fb37))
+
 ## [1.31.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.30.0...v1.31.0) (2026-10-26)
 
 ### Build system dependencies :hammer:
