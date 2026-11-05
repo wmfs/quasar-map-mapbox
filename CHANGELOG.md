@@ -1,3 +1,9 @@
+## [1.33.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.32.0...v1.33.0) (2026-11-05)
+
+### Build system dependencies :hammer:
+
+* **deps:** update dependency lodash.template to v4.18.1 ([#180](https://github.com/wmfs/quasar-map-mapbox/issues/180)) ([1b4cb0c](https://github.com/wmfs/quasar-map-mapbox/commit/1b4cb0ca5eed38252277590b7659ecb14ae097cf))
+
 ## [1.32.0](https://github.com/wmfs/quasar-map-mapbox/compare/v1.31.0...v1.32.0) (2026-11-04)
 
 ### Build system dependencies :hammer:
