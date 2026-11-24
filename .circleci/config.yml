@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   gh-app: wmfs/github-app-token@1.0.0
+  tymly: wmfs/tymly-ci@1.0.0
 jobs:
   build:
     docker:
@@ -25,6 +26,12 @@ jobs:
 workflows:
   release:
     jobs:
+      - tymly/commit-check:
+          context:
+            - docker-hub-creds
+          filters:
+            branches:
+              ignore: master
       - build:
           context:
             - docker-hub-creds
