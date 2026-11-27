@@ -30,6 +30,10 @@ $ npm install @wmfs/quasar-map-mapbox --save
       color=...  // optional
       id=...     // optional
       :locked=true|false // whether this marker can be dragged and moved around 
+      label=...  // optional, shown in a popup when the marker is clicked
+      @click=... // optional, called with { id, latitude, longitude } when the marker is clicked
+      popup-action-label=... // optional, adds a button to the label popup
+      @popupAction=...       // optional, called with { id, latitude, longitude } when that button is clicked
   </q-map>
 </template>
 <script>
