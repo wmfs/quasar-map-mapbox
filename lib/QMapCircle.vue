@@ -22,7 +22,9 @@ export default {
     'id',
     'showMarker',
     'label',
-    'locked'
+    'locked',
+    // Optional button in the popup, e.g. "Choose this address". Clicking it emits popupAction
+    'popupActionLabel'
   ],
   inject: ['getMapInstance'],
   data () {
@@ -63,7 +65,11 @@ export default {
           this.showMarker
       )
 
-      const popup = new mapboxgl.Popup({ closeButton: true, closeOnMove: true })
+      // focusAfterOpen: false - Mapbox's close button is aria-hidden, so focusing it
+      // makes browsers warn "Blocked aria-hidden on an element because its descendant retained focus"
+      const popup = new mapboxgl.Popup({ closeButton: true, closeOnMove: true, focusAfterOpen: false })
+      // Listening for @click makes the marker clickable (e.g. to choose a result)
+      const clickable = !!(this.$.vnode.props && this.$.vnode.props.onClick)
       const canvas = map.getCanvasContainer()
 
       popup.on('close', () => {
@@ -83,14 +89,37 @@ export default {
             .setHTML(`<div id="${popupId}" class="q-map-popup"></div>`)
             .addTo(map)
 
-        let template = '<div>'
-        template += label.map(l => `<div>${l}</div>`).join('')
-        template += '</div>'
+        // Mapbox marks its close button aria-hidden but it can still take focus when clicked,
+        // which makes browsers warn "Blocked aria-hidden on an element because its descendant retained focus".
+        // It already has aria-label="Close popup", so let assistive technology see it.
+        const closeButton = popup.getElement() && popup.getElement().querySelector('.mapboxgl-popup-close-button')
+        if (closeButton) closeButton.removeAttribute('aria-hidden')
 
-        const popupComponent = defineComponent({
-          template,
-          props: ['data', 'm']
-        })
+        let popupComponent
+
+        if (this.popupActionLabel) {
+          // Label lines are shown as text here, not compiled as a template
+          const onAction = () => {
+            popup.remove()
+            this.$emit('popupAction', { id: this.markerId, longitude: this.position[0], latitude: this.position[1] })
+          }
+          popupComponent = defineComponent({
+            template: `<div style="min-width: 160px;">
+              <div v-for="(l, i) in lines" :key="i" :style="i === 0 ? 'font-weight: 700;' : 'color: #505a5f; font-size: 13px;'">{{ l }}</div>
+              <button type="button" @click="onAction" style="margin-top: 8px; width: 100%; min-height: 36px; border: 0; border-radius: 4px; background: #00703c; color: #fff; font: inherit; font-weight: 600; cursor: pointer; box-shadow: 0 2px 0 #005a30;">{{ actionLabel }}</button>
+            </div>`,
+            setup: () => ({ lines: label.filter(l => l), actionLabel: this.popupActionLabel, onAction })
+          })
+        } else {
+          let template = '<div>'
+          template += label.map(l => `<div>${l}</div>`).join('')
+          template += '</div>'
+
+          popupComponent = defineComponent({
+            template,
+            props: ['data', 'm']
+          })
+        }
 
         createApp(popupComponent).mount(document.getElementById(popupId))
 
@@ -111,11 +140,14 @@ export default {
         })
       } else {
         map.on('mouseenter', this.markerId, () => {
-          if (this.label) canvas.style.cursor = 'pointer'
+          if (this.label || clickable) canvas.style.cursor = 'pointer'
         })
       }
 
       map.on('click', this.markerId, (e) => {
+        if (clickable) {
+          this.$emit('click', { id: this.markerId, longitude: this.position[0], latitude: this.position[1] })
+        }
         if (this.label) {
           addPopup(e)
         }
